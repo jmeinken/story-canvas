@@ -85,7 +85,7 @@ function makeCanvas(storyData, storyName, type) {
     //create open event for fullscreen or open now for embedded
     if (type == "fullscreen") {
         $('.' + storyName + '-open').click(function() {
-            $('body').css({
+            $('html, body').css({
                 'overflow': 'hidden',
                 'height': '100%'
             });
