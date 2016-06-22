@@ -98,9 +98,6 @@ function makeCanvas(storyData, storyName, type) {
 			$('body').on('swipedown',function() {
 				closeWindow();
 			});
-			$('body').on('scroll',function() {
-				closeWindow();
-			});
             return false;
         });
     } else {
@@ -241,7 +238,6 @@ function makeCanvas(storyData, storyName, type) {
 		});
 		$('body').off('swipeup');
 		$('body').off('swipedown');
-		$('body').off('scroll');
 		fullscreen = false;
 		endFullScreen();
 	}
