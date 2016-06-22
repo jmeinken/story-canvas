@@ -92,6 +92,7 @@ function makeCanvas(storyData, storyName, type) {
             });
             openWindow();
             fullscreen = true;
+			toggleFullScreen();
             return false;
         });
     } else {
@@ -222,6 +223,7 @@ function makeCanvas(storyData, storyName, type) {
 			'height': 'auto'
 		});
 		fullscreen = false;
+		toggleFullScreen();
 	}
     
     function moveForward() {
