@@ -217,7 +217,7 @@ function makeCanvas(storyData, storyName, type) {
     }
 	
     function openWindow() {
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        window.scrollTo(0, 0);
 		$(parentDiv).fadeIn();
         $(parentDiv + ' .sc-image-' + imgPosition).show();
         $(parentDiv + ' .sc-text').css( getTextFormatting(slides[imgPosition]) );
