@@ -90,8 +90,14 @@ function makeCanvas(storyData, storyName, type) {
 				'height' : 'auto',
             });
             openWindow();
-            fullscreen = true;
 			startFullScreen();
+			fullscreen = true;
+			$('body').on('swipeup',function() {
+				closeWindow();
+			});
+			$('body').on('swipedown',function() {
+				closeWindow();
+			});
             return false;
         });
     } else {
@@ -177,12 +183,12 @@ function makeCanvas(storyData, storyName, type) {
                             return false;
                     }
         });
-		$(parentDiv).on('swipeup',function() {
-			closeWindow();
-		});
-		$(parentDiv).on('swipedown',function() {
-			closeWindow();
-		});
+		//$(parentDiv).on('swipeup',function() {
+		//	closeWindow();
+		//});
+		//$(parentDiv).on('swipedown',function() {
+		//	closeWindow();
+		//});
 		
 		$( window ).on( "orientationchange", function( event ) {
 			//some browsers will change scroll permission when orientation change
@@ -230,6 +236,9 @@ function makeCanvas(storyData, storyName, type) {
 			'overflow': 'auto',
 			'height' : 'auto'
 		});
+		$('body').off('swipeup');
+		});
+		$('body').off('swipedown');
 		fullscreen = false;
 		endFullScreen();
 	}
