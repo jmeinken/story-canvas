@@ -5,7 +5,7 @@ body {
 }
 
 .sc-container{
-   position: absolute;
+   position: fixed;
    top: 0; /* Header Height */
    bottom: 0; /* Footer Height */
    width: 100%;
