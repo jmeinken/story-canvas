@@ -4,7 +4,10 @@ var position = 1;
 var fullscreen = false;
 
 
-
+function is_touch_device() {
+  return 'ontouchstart' in window        // works on most browsers 
+      || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+};
 	
 
 function makeStoryCanvas(storyData, storyName, embed) {
@@ -40,7 +43,12 @@ function makeCanvas(storyData, storyName, type) {
         }
     }
     
-    
+	var leftNav = '';
+	var rightNav = '';
+    if ( !is_touch_device() ) {
+		leftNav = '<div class="sc-left-nav"><a href="#" class="sc-back"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></div>';
+		rightNav = '<div class="sc-right-nav"><a href="#" class="sc-forward"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>';
+	}
     
     
     
@@ -70,8 +78,8 @@ function makeCanvas(storyData, storyName, type) {
                 '<a href="#" class="sc-forward"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>' +
             '</div>' +
         '</div>' +
-        '<div class="sc-left-nav"><a href="#" class="sc-back"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></div>' +
-        '<div class="sc-right-nav"><a href="#" class="sc-forward"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>');
+        leftNav +
+        rightNav);
 	
     
     for (var i=0; i < slides.length; i++) {
