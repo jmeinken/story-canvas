@@ -1,0 +1,118 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.sc-container{
+   position: absolute;
+   top: 0; /* Header Height */
+   bottom: 0; /* Footer Height */
+   width: 100%;
+   background-color: #cc3300;
+   z-index: 1000;
+   display:none;
+   color: white;
+   font-family: "Arial Black", Gadget, sans-serif;
+}
+
+.sc-container a {
+    color: #661a00;
+    text-decoration: none;
+}
+
+.sc-embedded{
+   position: absolute;
+   top: 0; /* Header Height */
+   bottom: 0; /* Footer Height */
+   width: 100%;
+   background-color: #cc3300;
+   z-index: 1000;
+   color: white;
+   font-family: "Arial Black", Gadget, sans-serif;
+}
+
+.sc-embedded a {
+    color: #661a00;
+    text-decoration: none;
+}
+
+.story-canvas .sc-text {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Georgia, serif;
+    font-size: 20px;
+	padding: 2px 5px;
+}
+
+.story-canvas img {
+    position: absolute;
+    max-width:100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.sc-toolbar {
+    background-color: #661a00;
+    display:block;
+    width:100%;
+    height:35px;
+    font-size: 23px;
+    line-height: 33px;
+    color: #cc3300;
+    z-index: 1002;
+    position: absolute;
+}
+.sc-toolbar a {
+    color: #cc3300;
+    text-decoration: none;
+}
+
+.sc-right-nav {
+    position: absolute;
+    max-width:100%;
+    max-height: 100%;
+    top: 50%;
+    right: 5px;
+    transform: translate(0, -50%);
+    font-size: 50px;
+    z-index: 1002;
+}
+.sc-left-nav {
+    position: absolute;
+    max-width:100%;
+    max-height: 100%;
+    top: 50%;
+    left: 5px;
+    transform: translate(0, -50%);
+    font-size: 50px;
+    z-index: 1002;
+}
+
+
+.sc-back {
+    visibility: hidden;
+}
+
+.story-canvas {
+    position: absolute;
+    top: 0; /* Header Height */
+    bottom: 0; /* Footer Height */
+    width: 100%;
+    z-index: 1001;
+}
+
+.sc-toolbar-right {
+    float: right;
+    padding-right: 20px;
+}
+
+.sc-toolbar-left {
+    padding-left: 20px;
+}
+
