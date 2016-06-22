@@ -185,6 +185,7 @@ function makeCanvas(storyData, storyName, type) {
 			closeWindow();
 		});
 		$( window ).on( "orientationchange", function( event ) {
+			alert('test1');
 			//some browsers will change scroll permission when orientation change
 		    if (fullscreen) {
 				window.scrollTo(0, 0);
