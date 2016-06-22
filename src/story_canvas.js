@@ -142,16 +142,10 @@ function makeCanvas(storyData, storyName, type) {
         $('.sc-toolbar').show();
     });
 	$('.story-canvas').on('swipeleft',function() {
-		var lastImg = slides.length - 1;
-		var lastText = slides[lastImg].text.length - 1
-		if (imgPosition != lastImg || textPosition != lastText) {
-			moveForward();
-		}
+		alert("left");
 	});
 	$('.story-canvas').on('swiperight',function() {
-		if (imgPosition != 0 || textPosition != 0) {
-			moveBackward();
-		}
+		alert("right");
 	});
 	
 
