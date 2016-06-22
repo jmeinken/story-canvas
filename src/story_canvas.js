@@ -184,6 +184,7 @@ function makeCanvas(storyData, storyName, type) {
 		$(parentDiv).on('swipedown',function() {
 			closeWindow();
 		});
+		/*
 		$( window ).on( "orientationchange", function( event ) {
 			alert('test1');
 			//some browsers will change scroll permission when orientation change
@@ -192,6 +193,7 @@ function makeCanvas(storyData, storyName, type) {
 				alert('test');
 			}
 		});
+		*/
     }
     
     function ifProp(obj, property, alt) {
