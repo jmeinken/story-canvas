@@ -86,10 +86,10 @@ function makeCanvas(storyData, storyName, type) {
     if (type == "fullscreen") {
         $('.' + storyName + '-open').click(function() {
             //$('html,body').animate({scrollTop:0},0);
-            $('html, body').css({
-                'overflow': 'hidden',
-                'height': '100%'
-            });
+            //$('html, body').css({
+            //    'overflow': 'hidden',
+            //    'height': '100%'
+            //});
             openWindow();
             fullscreen = true;
 			toggleFullScreen();
