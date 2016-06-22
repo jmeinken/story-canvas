@@ -4,10 +4,7 @@ var position = 1;
 var fullscreen = false;
 
 
-function is_touch_device() {
-  return 'ontouchstart' in window        // works on most browsers 
-      || navigator.maxTouchPoints;       // works on IE10/11 and Surface
-};
+
 	
 
 function makeStoryCanvas(storyData, storyName, embed) {
@@ -184,6 +181,12 @@ function makeCanvas(storyData, storyName, type) {
                             return false;
                     }
         });
+		$(parentDiv).on('swipeup',function() {
+			closeWindow();
+		});
+		$(parentDiv).on('swipedown',function() {
+			closeWindow();
+		});
     }
     
     function ifProp(obj, property, alt) {
