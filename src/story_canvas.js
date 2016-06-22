@@ -63,16 +63,12 @@ function makeCanvas(storyData, storyName, type) {
         '</div>' +
         '<div class="sc-toolbar">' +
             '<div class="sc-toolbar-right">' +
+				'<a href="#" class="sc-restart"><i class="fa fa-fast-backward" aria-hidden="true"></i></a>' +
+				'&nbsp;&nbsp;&nbsp;' +
                 toolbarRight +
             '</div>' +
             '<div class="sc-toolbar-left">' +
-                '<a href="#" class="sc-restart"><i class="fa fa-fast-backward" aria-hidden="true"></i></a>' +
-                '&nbsp;&nbsp;' +
-                'page <span class="sc-position">1</span>/' + slideCount +
-                '&nbsp;&nbsp;' +
-                '<a href="#" class="sc-back"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>' +
-                '&nbsp;' +
-                '<a href="#" class="sc-forward"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>' +
+                '<span class="sc-position">1</span>/' + slideCount +
             '</div>' +
         '</div>' +
         leftNav +
