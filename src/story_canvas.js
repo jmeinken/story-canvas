@@ -141,10 +141,10 @@ function makeCanvas(storyData, storyName, type) {
         $('.sc-right-nav').show();
         $('.sc-toolbar').show();
     });
-	$('.story-canvas').on('swipeleft',function() {
+	$(parentDiv).on('swipeleft',function() {
 		alert("left");
 	});
-	$('.story-canvas').on('swiperight',function() {
+	$(parentDiv).on('swiperight',function() {
 		alert("right");
 	});
 	

@@ -10,7 +10,7 @@
     <!-- jQuery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- FontAwesome -->
-    <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
     <!-- Story Canvas -->
     <script src="story_canvas.js"></script>
     <link rel="stylesheet" href="story_canvas.css">
@@ -79,6 +79,13 @@ var foxStory = {
 
 $( document ).ready(function() {
 	makeStoryCanvas(foxStory, "fox-story", true);
+	
+	$('#swipetest').on('swipeleft',function() {
+		alert("left");
+	});
+	$('#swipetest').on('swiperight',function() {
+		alert("right");
+	});
 });
     
 </script>    
@@ -101,5 +108,7 @@ $( document ).ready(function() {
         </div>
 	
     </div>
+	
+	<img id="swipetest" src="img/fox.jpg" alt="fox" />
 </body>
 </html>
