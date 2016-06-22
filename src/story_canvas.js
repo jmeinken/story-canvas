@@ -183,16 +183,15 @@ function makeCanvas(storyData, storyName, type) {
 		$(parentDiv).on('swipedown',function() {
 			closeWindow();
 		});
-		/*
+		
 		$( window ).on( "orientationchange", function( event ) {
-			alert('test1');
 			//some browsers will change scroll permission when orientation change
 		    if (fullscreen) {
 				window.scrollTo(0, 0);
-				alert('test');
+				openWindow();
 			}
 		});
-		*/
+		
     }
     
     function ifProp(obj, property, alt) {
