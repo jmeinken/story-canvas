@@ -237,7 +237,6 @@ function makeCanvas(storyData, storyName, type) {
 			'height' : 'auto'
 		});
 		$('body').off('swipeup');
-		});
 		$('body').off('swipedown');
 		fullscreen = false;
 		endFullScreen();
