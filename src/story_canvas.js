@@ -188,6 +188,7 @@ function makeCanvas(storyData, storyName, type) {
 			//some browsers will change scroll permission when orientation change
 		    if (fullscreen) {
 				window.scrollTo(0, 0);
+				alert('test');
 			}
 		});
     }
