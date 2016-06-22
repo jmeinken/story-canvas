@@ -87,7 +87,7 @@ function makeCanvas(storyData, storyName, type) {
         $('.' + storyName + '-open').click(function() {
             $('html, body').css({
                 'overflow': 'hidden',
-				'height' : '100%',
+				'height' : 'auto',
             });
             openWindow();
             fullscreen = true;
