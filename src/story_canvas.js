@@ -218,18 +218,17 @@ function makeCanvas(storyData, storyName, type) {
     }
 	
     function openWindow() {
-        $('body').scrollTop();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+		$("body").css("overflow", "hidden");
 		$(parentDiv).fadeIn();
         $(parentDiv + ' .sc-image-' + imgPosition).show();
         $(parentDiv + ' .sc-text').css( getTextFormatting(slides[imgPosition]) );
         $(parentDiv + ' .sc-text').html(slides[imgPosition].text[textPosition]);
-		//$(window).scroll(function() {
-		//	alert('test');
-		//});
     }
 	
 	function closeWindow() {
 		$(parentDiv).hide();
+		$("body").css("overflow", "auto");
 		//$('html, body').css({
 		//	'overflow': 'auto',
 		//	'height': 'auto'
