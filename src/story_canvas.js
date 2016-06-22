@@ -141,6 +141,19 @@ function makeCanvas(storyData, storyName, type) {
         $('.sc-right-nav').show();
         $('.sc-toolbar').show();
     });
+	$('.story-canvas').on('swipeleft',function() {
+		var lastImg = slides.length - 1;
+		var lastText = slides[lastImg].text.length - 1
+		if (imgPosition != lastImg || textPosition != lastText) {
+			moveForward();
+		}
+	});
+	$('.story-canvas').on('swiperight',function() {
+		if (imgPosition != 0 || textPosition != 0) {
+			moveBackward();
+		}
+	});
+	
 
     if (type == "fullscreen") {
         $(document).keydown(function(e){
