@@ -85,10 +85,10 @@ function makeCanvas(storyData, storyName, type) {
     //create open event for fullscreen or open now for embedded
     if (type == "fullscreen") {
         $('.' + storyName + '-open').click(function() {
-            $('html, body').css({
-                'overflow': 'hidden',
-                'height': '100%'
-            });
+            //$('html, body').css({
+            //    'overflow': 'hidden',
+            //    'height': '100%'
+            //});
             openWindow();
             fullscreen = true;
 			toggleFullScreen();
@@ -218,7 +218,7 @@ function makeCanvas(storyData, storyName, type) {
     }
 	
     function openWindow() {
-        $('#sc-container').scrollTop();
+        $('body').scrollTop();
 		$(parentDiv).fadeIn();
         $(parentDiv + ' .sc-image-' + imgPosition).show();
         $(parentDiv + ' .sc-text').css( getTextFormatting(slides[imgPosition]) );
@@ -230,10 +230,10 @@ function makeCanvas(storyData, storyName, type) {
 	
 	function closeWindow() {
 		$(parentDiv).hide();
-		$('html, body').css({
-			'overflow': 'auto',
-			'height': 'auto'
-		});
+		//$('html, body').css({
+		//	'overflow': 'auto',
+		//	'height': 'auto'
+		//});
 		fullscreen = false;
 		toggleFullScreen();
 	}
