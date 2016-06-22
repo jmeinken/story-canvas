@@ -4,6 +4,7 @@ function is_touch_device() {
       || navigator.maxTouchPoints;       // works on IE10/11 and Surface
 };
 
+/*
 function toggleFullScreen() {
   if (!document.fullscreenElement &&    // alternative standard method
       !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
@@ -28,6 +29,7 @@ function toggleFullScreen() {
     }
   }
 }
+*/
 
 (function() {
     var supportTouch = $.support.touch,
