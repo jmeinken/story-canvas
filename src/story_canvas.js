@@ -177,10 +177,10 @@ function makeCanvas(storyData, storyName, type) {
                             return false;
                     }
         });
-		$(parentDiv).on('swipeup',function() {
+		$('body').on('swipeup',function() {
 			closeWindow();
 		});
-		$(parentDiv).on('swipedown',function() {
+		$('body').on('swipedown',function() {
 			closeWindow();
 		});
 		
