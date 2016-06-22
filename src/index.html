@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- jQuery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <!-- FontAwesome -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
     <!-- Story Canvas -->
@@ -86,6 +87,10 @@ $( document ).ready(function() {
 	$('#swipetest').on('swiperight',function() {
 		alert("right");
 	});
+	$('#alerttest').on('click',function() {
+		alert("alert!");
+	});
+	
 });
     
 </script>    
@@ -108,7 +113,7 @@ $( document ).ready(function() {
         </div>
 	
     </div>
-	
+	<a id="alerttest" href="#">trigger an alert</a>
 	<img id="swipetest" src="img/fox.jpg" alt="fox" />
 </body>
 </html>
