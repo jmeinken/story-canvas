@@ -54,7 +54,7 @@ function makeCanvas(storyData, storyName, type) {
         var parentDiv = "#" + storyName + "-container";
         $(parentDiv).addClass(storyName);
         $(parentDiv).addClass('sc-embedded');
-        var toolbarRight = '<a href="#" class="' + storyName + '-open"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>';
+        var toolbarRight = '<a href="#" class="' + storyName + '-open"> <i class="fa fa-arrows-alt" aria-hidden="true"></i> </a>';
     }
     $(parentDiv).html(
         '<div class="story-canvas"></div>' +
@@ -63,8 +63,8 @@ function makeCanvas(storyData, storyName, type) {
         '<div class="sc-tap-backward-zone"></div>' +
         '<div class="sc-toolbar">' +
             '<div class="sc-toolbar-right">' +
-				'<a href="#" class="sc-restart"><i class="fa fa-fast-backward" aria-hidden="true"></i></a>' +
-				'&nbsp;&nbsp;&nbsp;' +
+				'<a href="#" class="sc-restart"> <i class="fa fa-fast-backward" aria-hidden="true"></i> </a>' +
+				'&nbsp;&nbsp;' +
                 toolbarRight +
             '</div>' +
             '<div class="sc-toolbar-left">' +
