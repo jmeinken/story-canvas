@@ -49,12 +49,12 @@ function makeCanvas(storyData, storyName, type) {
     if (type == "fullscreen") {
         var parentDiv = "#" + storyName + "-fullscreen";
         $('body').append('<div id="' + storyName + '-fullscreen" class="sc-container ' + storyName + '"></div>');
-        var toolbarRight = '<a href="#" class="sc-close"><i class="fa fa-times" aria-hidden="true"></i></a>';
+        var toolbarRight = '<a href="#" class="sc-close"> <i class="fa fa-times" aria-hidden="true"></i>XX </a>';
     } else {
         var parentDiv = "#" + storyName + "-container";
         $(parentDiv).addClass(storyName);
         $(parentDiv).addClass('sc-embedded');
-        var toolbarRight = '<a href="#" class="' + storyName + '-open"> <i class="fa fa-arrows-alt" aria-hidden="true"></i> </a>';
+        var toolbarRight = '<a href="#" class="' + storyName + '-open"> <i class="fa fa-arrows-alt" aria-hidden="true"></i>XX </a>';
     }
     $(parentDiv).html(
         '<div class="story-canvas"></div>' +
@@ -64,7 +64,7 @@ function makeCanvas(storyData, storyName, type) {
         '<div class="sc-toolbar">' +
             '<div class="sc-toolbar-right">' +
 				'<a href="#" class="sc-restart"> <i class="fa fa-fast-backward" aria-hidden="true"></i> </a>' +
-				'&nbsp;&nbsp;' +
+				'&nbsp;' +
                 toolbarRight +
             '</div>' +
             '<div class="sc-toolbar-left">' +
