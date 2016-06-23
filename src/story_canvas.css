@@ -102,7 +102,7 @@ body {
 
 .story-canvas {
     position: absolute;
-    top: 0; /* Header Height */
+    top: 34px; /* Header Height */
     bottom: 0; /* Footer Height */
     width: 100%;
     z-index: 1001;

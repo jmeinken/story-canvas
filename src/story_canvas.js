@@ -162,6 +162,7 @@ function makeCanvas(storyData, storyName, type) {
             $('.sc-left-nav').hide();
             $('.sc-right-nav').hide();
             $('.sc-toolbar').hide();
+            $('.story-canvas').stop().animate({top : 0}, 1000);
         }
     });
     
@@ -169,6 +170,7 @@ function makeCanvas(storyData, storyName, type) {
         $('.sc-left-nav').show();
         $('.sc-right-nav').show();
         $('.sc-toolbar').show();
+        $('.story-canvas').stop().css({top : '34px'});
     });
     
     $(parentDiv).on('swipeleft',function() {
