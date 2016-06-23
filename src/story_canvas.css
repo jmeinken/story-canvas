@@ -66,7 +66,7 @@ body {
     font-size: 23px;
     line-height: 33px;
     color: #cc3300;
-    z-index: 1002;
+    z-index: 2000;
     position: absolute;
 }
 .sc-toolbar a {
@@ -82,7 +82,7 @@ body {
     right: 5px;
     transform: translate(0, -50%);
     font-size: 50px;
-    z-index: 1002;
+    z-index: 2000;
 }
 .sc-left-nav {
     position: absolute;
@@ -92,7 +92,7 @@ body {
     left: 5px;
     transform: translate(0, -50%);
     font-size: 50px;
-    z-index: 1002;
+    z-index: 2000;
 }
 
 
@@ -110,27 +110,30 @@ body {
 
 .sc-swipe-zone {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 0;
     border: black 1px solid;
     width: 100%;
-    height: 80%;
+    height: 85%;
+    z-index: 2000;
 }
 .sc-tap-forward-zone {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 20%;
     border: blue 1px solid;
     width: 80%;
-    height: 80%;
+    height: 85%;
+    z-index: 2000;
 }
 .sc-tap-backward-zone {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 0;
     border: green 1px solid;
     width: 20%;
-    height: 80%;
+    height: 85%;
+    z-index: 2000;
 }
 
 .sc-toolbar-right {

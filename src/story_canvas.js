@@ -176,22 +176,26 @@ function makeCanvas(storyData, storyName, type) {
         $('.story-canvas').stop().css({top : '34px'});
     });
     
-    $(parentDiv+' .story-canvas').on('swipeleft',function() {
+    $(parentDiv+' .sc-swipe-zone').on('swipeleft',function() {
         var lastImg = slides.length - 1;
         var lastText = slides[lastImg].text.length - 1
         if (imgPosition != lastImg || textPosition != lastText) {
             moveForward(slides);
         }
     });
-    $(parentDiv+' .story-canvas').on('tap',function() {
+    $(parentDiv+' .sc-swipe-zone').on('swiperight',function() {
+        if (imgPosition != 0 || textPosition != 0) {
+            moveBackward(slides);
+        }
+    });
+    $(parentDiv+' .sc-tap-forward-zone').on('tap',function() {
         var lastImg = slides.length - 1;
         var lastText = slides[lastImg].text.length - 1
         if (imgPosition != lastImg || textPosition != lastText) {
             moveForward(slides);
         }
     });
-    
-    $(parentDiv+' .story-canvas').on('swiperight',function() {
+    $(parentDiv+' .sc-tap-backward-zone').on('tap',function() {
         if (imgPosition != 0 || textPosition != 0) {
             moveBackward(slides);
         }
