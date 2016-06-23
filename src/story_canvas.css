@@ -108,6 +108,31 @@ body {
     z-index: 1001;
 }
 
+.sc-swipe-zone {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    border: black 1px solid;
+    width: 100%;
+    height: 80%;
+}
+.sc-tap-forward-zone {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    border: blue 1px solid;
+    width: 80%;
+    height: 80%;
+}
+.sc-tap-backward-zone {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    border: green 1px solid;
+    width: 20%;
+    height: 80%;
+}
+
 .sc-toolbar-right {
     float: right;
     padding-right: 10px;
