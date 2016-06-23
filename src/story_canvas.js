@@ -95,10 +95,6 @@ function makeCanvas(storyData, storyName, type) {
             startFullScreen();
             fullscreen = true;
             return false;
-        }).on('tap', function() {
-            openFullScreen(parentDiv);
-            startFullScreen();
-            fullscreen = true;
         });
         
         $('.sc-close').click(function() {
@@ -194,7 +190,6 @@ function makeCanvas(storyData, storyName, type) {
                 moveBackward(slides);
             }
         });
-        /*
         $(parentDiv+' .sc-tap-forward-zone').on('tap',function() {
             var lastImg = slides.length - 1;
             var lastText = slides[lastImg].text.length - 1
@@ -207,7 +202,6 @@ function makeCanvas(storyData, storyName, type) {
                 moveBackward(slides);
             }
         });
-        */
    }
    
 };
