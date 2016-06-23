@@ -173,7 +173,14 @@ function makeCanvas(storyData, storyName, type) {
         $('.story-canvas').stop().css({top : '34px'});
     });
     
-    $(parentDiv).on('swipeleft',function() {
+    $(parentDiv+' .story-canvas').on('swipeleft',function() {
+        var lastImg = slides.length - 1;
+        var lastText = slides[lastImg].text.length - 1
+        if (imgPosition != lastImg || textPosition != lastText) {
+            moveForward(slides);
+        }
+    });
+    $(parentDiv+' .story-canvas').on('tap',function() {
         var lastImg = slides.length - 1;
         var lastText = slides[lastImg].text.length - 1
         if (imgPosition != lastImg || textPosition != lastText) {
@@ -181,7 +188,7 @@ function makeCanvas(storyData, storyName, type) {
         }
     });
     
-    $(parentDiv).on('swiperight',function() {
+    $(parentDiv+' .story-canvas').on('swiperight',function() {
         if (imgPosition != 0 || textPosition != 0) {
             moveBackward(slides);
         }
