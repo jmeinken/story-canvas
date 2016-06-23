@@ -58,7 +58,6 @@ function makeCanvas(storyData, storyName, type) {
     }
     $(parentDiv).html(
         '<div class="story-canvas"></div>' +
-        '<div class="sc-swipe-zone"></div>' +
         '<div class="sc-tap-forward-zone"></div>' +
         '<div class="sc-tap-backward-zone"></div>' +
         '<div class="sc-toolbar">' +
@@ -178,14 +177,14 @@ function makeCanvas(storyData, storyName, type) {
         });
     } else {
     
-        $(parentDiv+' .sc-swipe-zone').on('swipeleft',function() {
+        $(parentDiv+' .sc-tap-forward-zone').on('swipeleft',function() {
             var lastImg = slides.length - 1;
             var lastText = slides[lastImg].text.length - 1
             if (imgPosition != lastImg || textPosition != lastText) {
                 moveForward(slides);
             }
         });
-        $(parentDiv+' .sc-swipe-zone').on('swiperight',function() {
+        $(parentDiv+' .sc-tap-forward-zone').on('swiperight',function() {
             if (imgPosition != 0 || textPosition != 0) {
                 moveBackward(slides);
             }
