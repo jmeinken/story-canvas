@@ -76,7 +76,7 @@ function moveForward(slides) {
     if (imgPosition == slides.length - 1 && textPosition == slides[imgPosition].text.length - 1) {
         $('.sc-forward').css({visibility : 'hidden'});
     }
-    
+    $('.sc-position').text(position);
 }
 
 function closeFullScreen(parentDiv) {
