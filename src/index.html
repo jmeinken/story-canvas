@@ -14,6 +14,7 @@
     <!-- FontAwesome -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
     <!-- Story Canvas -->
+    <script src="story_canvas_functions.js"></script>
     <script src="story_canvas.js"></script>
     <link rel="stylesheet" href="story_canvas.css">
 
@@ -80,17 +81,7 @@ var foxStory = {
 }
 
 $( document ).ready(function() {
-	makeStoryCanvas(foxStory, "fox-story", true);
-	
-	$('#swipetest').on('swipeleft',function() {
-		alert("left");
-	});
-	$('#swipetest').on('swiperight',function() {
-		alert("right");
-	});
-	$('#alerttest').on('click',function() {
-		alert("alert!");
-	});
+	createStoryCanvas(foxStory, "fox-story", true);
 	
 });
     
