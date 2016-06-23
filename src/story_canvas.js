@@ -42,28 +42,33 @@ function makeCanvas(storyData, storyName, type) {
     }
     var leftNav = '';
     var rightNav = '';
+    var tapForwardZone = '';
+    var tapBackwardZone = '';
     if ( !is_touch_device() ) {
         leftNav = '<div class="sc-left-nav"><a href="#" class="sc-back"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></div>';
         rightNav = '<div class="sc-right-nav"><a href="#" class="sc-forward"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>';
+    } else {
+        tapForwardZone = '<div class="sc-tap-forward-zone"></div>';
+        tapBackwardZone = '<div class="sc-tap-backward-zone"></div>';
     }
     if (type == "fullscreen") {
         var parentDiv = "#" + storyName + "-fullscreen";
         $('body').append('<div id="' + storyName + '-fullscreen" class="sc-container ' + storyName + '"></div>');
-        var toolbarRight = '<a href="#" class="sc-close"> <i class="fa fa-times" aria-hidden="true"></i>XX </a>';
+        var toolbarRight = '<a href="#" class="sc-close"><i class="fa fa-times" aria-hidden="true"></i></a>';
     } else {
         var parentDiv = "#" + storyName + "-container";
         $(parentDiv).addClass(storyName);
         $(parentDiv).addClass('sc-embedded');
-        var toolbarRight = '<a href="#" class="' + storyName + '-open"> <i class="fa fa-arrows-alt" aria-hidden="true"></i>XX </a>';
+        var toolbarRight = '<a href="#" class="' + storyName + '-open"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>';
     }
     $(parentDiv).html(
         '<div class="story-canvas"></div>' +
-        '<div class="sc-tap-forward-zone"></div>' +
-        '<div class="sc-tap-backward-zone"></div>' +
+        tapForwardZone +
+        tapBackwardZone +
         '<div class="sc-toolbar">' +
             '<div class="sc-toolbar-right">' +
-				'<a href="#" class="sc-restart"> <i class="fa fa-fast-backward" aria-hidden="true"></i> </a>' +
-				'&nbsp;' +
+				'<a href="#" class="sc-restart"><i class="fa fa-fast-backward" aria-hidden="true"></i></a>' +
+				'&nbsp;&nbsp;&nbsp;' +
                 toolbarRight +
             '</div>' +
             '<div class="sc-toolbar-left">' +

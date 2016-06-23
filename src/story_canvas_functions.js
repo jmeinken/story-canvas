@@ -76,7 +76,7 @@ function moveForward(slides) {
     if (imgPosition == slides.length - 1 && textPosition == slides[imgPosition].text.length - 1) {
         $('.sc-forward').css({visibility : 'hidden'});
     }
-    $('.sc-position').text(position);
+    
 }
 
 function closeFullScreen(parentDiv) {
@@ -121,8 +121,8 @@ function getTextFormatting(slide) {
     myobj.color = ifProp(slide.textFormatting, "color", "white");
     myobj.top = ifProp(slide.textFormatting, "top", "80%");
     myobj.fontSize = ifProp(slide.textFormatting, "fontSize", "20px");
-            myobj.backgroundColor = ifProp(slide.textFormatting, "backgroundColor", "transparent");
-            myobj.opacity = ifProp(slide.textFormatting, "opacity", "1");
+    myobj.backgroundColor = ifProp(slide.textFormatting, "backgroundColor", "transparent");
+    myobj.opacity = ifProp(slide.textFormatting, "opacity", "1");
     console.log(myobj);
     return myobj;
 }
