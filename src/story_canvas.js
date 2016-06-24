@@ -147,9 +147,9 @@ function makeCanvas(storyData, storyName, type) {
                     if (slides[i].text) { 
                         for (var j=0; j < slides[i].text.length; j++) {
                             var txtClass = 'sc-image-' + i + '-text-' + j;
-                            $(parentDiv+' .'+txtClass).css( getTextFormatting(slides[i], type) );
+                            $(parentDiv+' .'+txtClass).css( getTextFormatting(slides[i], 'fullscreen') );
                         }
-                        $(parentDiv+' .sc-image-box-'+i).css( getImageFormatting(slides[i], type, i, j) );
+                        $(parentDiv+' .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
                     }
                 }
             }, 1000);
