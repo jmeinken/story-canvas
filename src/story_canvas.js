@@ -141,6 +141,7 @@ function makeCanvas(storyData, storyName, type) {
 
         $( window ).on( "orientationchange", function( event ) {
             //some browsers will change scroll permission when orientation change
+            alert('yup');
             for (var i=0; i < slides.length; i++) {
                 if (slides[i].text) { 
                     for (var j=0; j < slides[i].text.length; j++) {
