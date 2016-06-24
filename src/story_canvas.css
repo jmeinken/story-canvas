@@ -22,6 +22,10 @@ body {
     text-decoration: none;
 }
 
+.sc-image-box-1 {
+    border: 1px solid black;
+}
+
 .sc-embedded{
    position: absolute;
    top: 0; /* Header Height */
