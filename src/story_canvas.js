@@ -143,8 +143,10 @@ function makeCanvas(storyData, storyName, type) {
             //some browsers will change scroll permission when orientation change
             setTimeout( function() {
                 for (var i=0; i < slides.length; i++) {
+                    
                     if (slides[i].text) { 
                         for (var j=0; j < slides[i].text.length; j++) {
+                            var txtClass = 'sc-image-' + i + '-text-' + j;
                             $(parentDiv+' .'+txtClass).css( getTextFormatting(slides[i], type) );
                         }
                         $(parentDiv+' .sc-image-box-'+i).css( getImageFormatting(slides[i], type, i, j) );
