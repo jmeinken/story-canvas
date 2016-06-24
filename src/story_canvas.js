@@ -152,7 +152,7 @@ function makeCanvas(storyData, storyName, type) {
                         $(parentDiv+' .sc-image-box-'+i).css( getImageFormatting(slides[i], type, i, j) );
                     }
                 }
-            }, 0);
+            }, 100);
             if (fullscreen) {
                 window.scrollTo(0, 0);
                 configureWindow(slides, parentDiv);
