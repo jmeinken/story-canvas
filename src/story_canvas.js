@@ -89,23 +89,14 @@ function makeCanvas(storyData, storyName, type) {
             $(parentDiv+' .story-canvas .sc-image-box-'+i).append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image-' + i + '" />');
         }
         if (slides[i].text) { 
-            var height = 0;
+            
             for (var j=0; j < slides[i].text.length; j++) {
                 var txtClass = 'sc-image-' + i + '-text-' + j;
                 $(parentDiv+' .story-canvas').append('<div " class="sc-text ' + txtClass + '" />');
                 $(parentDiv+' .'+txtClass).css( getTextFormatting(slides[i], type) );
                 $(parentDiv+' .'+txtClass).html(slides[i].text[j]);
-                height = Math.max( height, $('.'+txtClass).outerHeight() );
             }
-            if ( slides[i].hasOwnProperty('textFormatting')) {
-                var overlay = ifProp(slides[i].textFormatting, 'overlay', false);
-            }
-            if (type == "fullscreen") {
-                height = height + 40;
-            } 
-            if (!overlay) {
-                $(parentDiv+' .sc-image-box-'+i).css({bottom: height});
-            }
+            $(parentDiv+' .sc-image-box-'+i).css( getImageFormatting(slides[i], type, i, j) );
         }
     }
     
@@ -150,6 +141,14 @@ function makeCanvas(storyData, storyName, type) {
 
         $( window ).on( "orientationchange", function( event ) {
             //some browsers will change scroll permission when orientation change
+            for (var i=0; i < slides.length; i++) {
+                if (slides[i].text) { 
+                    for (var j=0; j < slides[i].text.length; j++) {
+                        $(parentDiv+' .'+txtClass).css( getTextFormatting(slides[i], type) );
+                    }
+                    $(parentDiv+' .sc-image-box-'+i).css( getImageFormatting(slides[i], type, i, j) );
+                }
+            }
             if (fullscreen) {
                 window.scrollTo(0, 0);
                 configureWindow(slides, parentDiv);

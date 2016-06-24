@@ -152,16 +152,21 @@ function getTextFormatting(slide, displayType) {
     return myobj;
 }
 
-function getImageFormatting(slide) {
+function getImageFormatting(slide, type, i, j) {
     var myobj = {};
-    if (!slide.hasOwnProperty("textFormatting")) {
-        slide.textFormatting = {};
+    var height = 0;
+    for (var j=0; j < slide.text.length; j++) {
+        var txtClass = 'sc-image-' + i + '-text-' + j;
+        height = Math.max( height, $('.'+txtClass).outerHeight() );
     }
-    overlay = ifProp(slide.textFormatting, "overlay", false);
-    if (overlay) {
-        myobj.maxHeight = "100%";
-    } else {
-        myobj.maxHeight = "50%";
+    if ( slide.hasOwnProperty('textFormatting')) {
+        var overlay = ifProp(slide.textFormatting, 'overlay', false);
+    }
+    if (type == "fullscreen") {
+        height = height + 40;
+    } 
+    if (!overlay) {
+        myobj.bottom = height;
     }
     return myobj;
 }
