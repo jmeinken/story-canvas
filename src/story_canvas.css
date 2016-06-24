@@ -46,9 +46,8 @@ body {
     width: 100%;
     font-family: Georgia, serif;
     font-size: 20px;
-    padding: 5px 2px;
+    padding: 5px 5px;
     text-align: center;
-    margin: 0 20px;
 }
 
 .story-canvas img {
