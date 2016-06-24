@@ -24,6 +24,9 @@ function createStoryCanvas(storyData, storyName, embed) {
                 $('.sc-right-nav a').css({color: color});
                 $('.sc-toolbar').css({backgroundColor: color});
             }
+            if ( storyData.globalSettings.hasOwnProperty("tryFullScreen") ) {
+                tryFullScreen = storyData.globalSettings.tryFullScreen;
+            }
         }
 }
 
@@ -62,7 +65,7 @@ function makeCanvas(storyData, storyName, type) {
         var toolbarRight = '<a href="#" class="' + storyName + '-open"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>';
     }
     $(parentDiv).html(
-        '<div class="story-canvas"></div>' +
+        '<div class="story-canvas"><div class="sc-image-box"></div></div>' +
         tapForwardZone +
         tapBackwardZone +
         '<div class="sc-toolbar">' +
@@ -82,7 +85,7 @@ function makeCanvas(storyData, storyName, type) {
     
     for (var i=0; i < slides.length; i++) {
         if (slides[i].img) { 
-            $(parentDiv+' .story-canvas').append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image-' + i + '" />');
+            $(parentDiv+' .story-canvas .sc-image-box').append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image-' + i + '" />');
         }
         if (slides[i].text) { 
             for (var j=0; j < slides[i].text.length; j++) {
@@ -103,7 +106,6 @@ function makeCanvas(storyData, storyName, type) {
         
         $('.' + storyName + '-open').click(function() {
             openFullScreen(parentDiv);
-            startFullScreen();
             fullscreen = true;
             return false;
         });
@@ -116,7 +118,7 @@ function makeCanvas(storyData, storyName, type) {
         $(document).keydown(function(e){
             if (e.keyCode == 37 && fullscreen) { 
                 if (imgPosition != 0 || textPosition != 0) {
-                    moveBackward(slides);
+                    moveBackward(parentDiv, slides);
                 }
                 return false;
             }
@@ -124,7 +126,7 @@ function makeCanvas(storyData, storyName, type) {
                 var lastImg = slides.length - 1;
                 var lastText = slides[lastImg].text.length - 1
                 if (imgPosition != lastImg || textPosition != lastText) {
-                    moveForward(slides);
+                    moveForward(parentDiv, slides);
                 }
                 return false;
             }
@@ -148,26 +150,24 @@ function makeCanvas(storyData, storyName, type) {
      * ATTACH EVENTS FOR STORY CANVAS (BOTH FULL SCREEN AND EMBEDDED
      */
     $(parentDiv+' .sc-forward').click(function() {
-        moveForward(slides);
+        moveForward(parentDiv, slides);
         return false;
     });
     
     $(parentDiv+' .sc-back').click(function() {
-        moveBackward(slides);
+        moveBackward(parentDiv, slides);
         return false;
     });
 
     $(parentDiv+' .sc-restart').click(function() {
+        hideSlide(imgPosition,textPosition, false);
         textPosition = 0;
         imgPosition = 0;
         position = 1;
         $('.sc-back').css({visibility: 'hidden'});
         $('.sc-forward').css({visibility: 'visible'});
-        $('.story-canvas img').hide();
-        $('.sc-image-' + imgPosition).show();
-        $('.sc-text').css( getTextFormatting(slides[imgPosition]) );
-        $('.sc-text').html(slides[imgPosition].text[textPosition]);
 	$('.sc-position').text(position);
+        showSlide(imgPosition,textPosition, parentDiv, slides);
         return false;
     });
     
@@ -193,24 +193,24 @@ function makeCanvas(storyData, storyName, type) {
             var lastImg = slides.length - 1;
             var lastText = slides[lastImg].text.length - 1
             if (imgPosition != lastImg || textPosition != lastText) {
-                moveForward(slides);
+                moveForward(parentDiv, slides);
             }
         });
         $(parentDiv+' .sc-tap-forward-zone').on('swiperight',function() {
             if (imgPosition != 0 || textPosition != 0) {
-                moveBackward(slides);
+                moveBackward(parentDiv, slides);
             }
         });
         $(parentDiv+' .sc-tap-forward-zone').on('tap',function() {
             var lastImg = slides.length - 1;
             var lastText = slides[lastImg].text.length - 1
             if (imgPosition != lastImg || textPosition != lastText) {
-                moveForward(slides);
+                moveForward(parentDiv, slides);
             }
         });
         $(parentDiv+' .sc-tap-backward-zone').on('tap',function() {
             if (imgPosition != 0 || textPosition != 0) {
-                moveBackward(slides);
+                moveBackward(parentDiv, slides);
             }
         });
    }

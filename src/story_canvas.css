@@ -41,11 +41,12 @@ body {
 .story-canvas .sc-text {
     position: absolute;
     top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 0;
+    width: 100%;
     font-family: Georgia, serif;
     font-size: 20px;
-	padding: 2px 5px;
+    padding: 5px 2px;
+    text-align: center;
 }
 
 .story-canvas img {
@@ -106,6 +107,13 @@ body {
     bottom: 0; /* Footer Height */
     width: 100%;
     z-index: 1001;
+}
+
+.sc-image-box {
+    position: absolute;
+    top: 0; /* Header Height */
+    bottom: 0; /* Footer Height */
+    width: 100%;
 }
 
 

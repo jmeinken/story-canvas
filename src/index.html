@@ -27,8 +27,8 @@ var foxStory = {
                 'The Sly Fox<br><br><br><div style="font-size:20px;text-align:center">by John Meinken</div>',
             ],
             textFormatting: { 
-                top: '50%',
-                fontSize: '50px'
+                center: true,
+                fontSize: '50px',
             }
         },
         {
@@ -36,12 +36,10 @@ var foxStory = {
             alt: 'fox',
             text: [
                 'The fox came out.',
-                'Then she walked and walked.'
+                'Then she walked and walked. And walked and walked. And walked and walked. And walked and walked.'
             ],
             textFormatting: { 
-                color: 'black',
-                backgroundColor: 'white',
-                opacity: 0.5,
+                color: 'white',
                 overlay: false
             }
         },
@@ -62,7 +60,8 @@ var foxStory = {
             ],
             textFormatting: { 
                 top: '120px',
-                fontSize: '35px'
+                fontSize: '35px',
+                overlay: false
             }
         },
         {
@@ -70,14 +69,15 @@ var foxStory = {
                 'The End',
             ],
             textFormatting: { 
-                top: '50%',
+                center: true,
                 fontSize: '70px'
             }
         },
     ],
     globalSettings: {
         backgroundColor: '#cc3300',
-        toolbarColor: '#661a00'
+        toolbarColor: '#661a00',
+        tryFullScreen: true,
     }
 }
 
