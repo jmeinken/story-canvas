@@ -101,12 +101,12 @@ function showSlide(slideNumber, textNumber, parentDiv, slides) {
     if ( slide.hasOwnProperty('textFormatting')) {
         var overlay = ifProp(slide.textFormatting, 'overlay', true);
     }
-    if (!overlay) {
-        height = $(parentDiv+' .'+textClass).outerHeight();
-        $(parentDiv+' .sc-image-box').stop().animate({bottom: height}, 500);
-    } else {
-        $(parentDiv+' .sc-image-box').stop().animate({bottom: 0}, 500);
-    }
+    //if (!overlay) {
+    //    height = $(parentDiv+' .'+textClass).outerHeight();
+    //    $(parentDiv+' .sc-image-box').stop().animate({bottom: height}, 500);
+    //} else {
+    //    $(parentDiv+' .sc-image-box').stop().animate({bottom: 0}, 500);
+    //}
     
 }
 

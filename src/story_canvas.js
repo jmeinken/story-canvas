@@ -65,7 +65,7 @@ function makeCanvas(storyData, storyName, type) {
         var toolbarRight = '<a href="#" class="' + storyName + '-open"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>';
     }
     $(parentDiv).html(
-        '<div class="story-canvas"><div class="sc-image-box"></div></div>' +
+        '<div class="story-canvas"></div>' +
         tapForwardZone +
         tapBackwardZone +
         '<div class="sc-toolbar">' +
@@ -85,14 +85,23 @@ function makeCanvas(storyData, storyName, type) {
     
     for (var i=0; i < slides.length; i++) {
         if (slides[i].img) { 
-            $(parentDiv+' .story-canvas .sc-image-box').append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image-' + i + '" />');
+            $(parentDiv+' .story-canvas').append('<div class="sc-image-box sc-image-box-' +i + '"></div>');
+            $(parentDiv+' .story-canvas .sc-image-box-'+i).append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image-' + i + '" />');
         }
         if (slides[i].text) { 
+            var height = 0;
             for (var j=0; j < slides[i].text.length; j++) {
                 var txtClass = 'sc-image-' + i + '-text-' + j;
                 $(parentDiv+' .story-canvas').append('<div " class="sc-text ' + txtClass + '" />');
                 $('.'+txtClass).css( getTextFormatting(slides[i]) );
                 $('.'+txtClass).html(slides[i].text[j]);
+                height = Math.max( height, $('.'+txtClass).outerHeight() );
+            }
+            if ( slides[i].hasOwnProperty('textFormatting')) {
+                var overlay = ifProp(slides[i].textFormatting, 'overlay', true);
+            }
+            if (!overlay) {
+                $(parentDiv+' .sc-image-box-'+i).css({bottom: height});
             }
         }
     }
