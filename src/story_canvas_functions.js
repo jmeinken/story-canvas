@@ -59,14 +59,16 @@ function moveForward(slides) {
         $('.sc-image-' + lastImgPosition).fadeOut(1000);
         if (slides[imgPosition].hasOwnProperty('img')) {
             $('.sc-image-' + imgPosition).fadeIn(1000, function() {
-                $('.sc-text').html(slides[imgPosition].text[textPosition]);
                 $('.sc-text').css( getTextFormatting(slides[imgPosition]) );
+                $('.sc-text').html(slides[imgPosition].text[textPosition]);
+                $('.sc-image-' + imgPosition).css( getImageFormatting(slides[imgPosition]) );
                 $('.sc-text').fadeIn(200);
             });
         } else {
             setTimeout(function() {
-                $('.sc-text').html(slides[imgPosition].text[textPosition]);
                 $('.sc-text').css( getTextFormatting(slides[imgPosition]) );
+                $('.sc-text').html(slides[imgPosition].text[textPosition]);
+                $('.sc-image-' + imgPosition).css( getImageFormatting(slides[imgPosition]) );
                 $('.sc-text').fadeIn(200);
             }, 1000);
         }
@@ -109,6 +111,7 @@ function openFullScreen(parentDiv) {
     $(parentDiv + ' .sc-image-' + imgPosition).show();
     $(parentDiv + ' .sc-text').css( getTextFormatting(slides[imgPosition]) );
     $(parentDiv + ' .sc-text').html(slides[imgPosition].text[textPosition]);
+    $(parentDiv + ' .sc-image-' + imgPosition).css( getImageFormatting(slides[imgPosition]) );
 }
 
 
@@ -116,14 +119,35 @@ function openFullScreen(parentDiv) {
 function getTextFormatting(slide) {
     var myobj = {};
     if (!slide.hasOwnProperty("textFormatting")) {
-        slide.textFormatting = {}
+        slide.textFormatting = {};
+    }
+    overlay = ifProp(slide.textFormatting, "overlay", true);
+    if (overlay) {
+        myobj.top = ifProp(slide.textFormatting, "top", "80%");
+        myobj.bottom = 'auto';
+    } else {
+        myobj.top = 'auto';
+        myobj.bottom = 0;
     }
     myobj.color = ifProp(slide.textFormatting, "color", "white");
-    myobj.top = ifProp(slide.textFormatting, "top", "80%");
     myobj.fontSize = ifProp(slide.textFormatting, "fontSize", "20px");
     myobj.backgroundColor = ifProp(slide.textFormatting, "backgroundColor", "transparent");
     myobj.opacity = ifProp(slide.textFormatting, "opacity", "1");
     console.log(myobj);
+    return myobj;
+}
+
+function getImageFormatting(slide) {
+    var myobj = {};
+    if (!slide.hasOwnProperty("textFormatting")) {
+        slide.textFormatting = {};
+    }
+    overlay = ifProp(slide.textFormatting, "overlay", true);
+    if (overlay) {
+        myobj.maxHeight = "100%";
+    } else {
+        myobj.maxHeight = "50%";
+    }
     return myobj;
 }
 
