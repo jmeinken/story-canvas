@@ -125,14 +125,14 @@ function getTextFormatting(slide, displayType) {
     if (!slide.hasOwnProperty("textFormatting")) {
         slide.textFormatting = {};
     }
-    overlay = ifProp(slide.textFormatting, "overlay", true);
+    overlay = ifProp(slide.textFormatting, "overlay", false);
     center = ifProp(slide.textFormatting, "center", false);
     if (overlay && center) {
         myobj.top = '50%';
         myobj.bottom = 'auto'
         myobj.transform = 'translate(0, -50%)';
     } else if (overlay) {
-        myobj.top = ifProp(slide.textFormatting, "top", "80%");
+        myobj.top = ifProp(slide.textFormatting, "top", "70%");
         myobj.bottom = 'auto';
         myobj.transform = 'none';
     } else {
@@ -157,7 +157,7 @@ function getImageFormatting(slide) {
     if (!slide.hasOwnProperty("textFormatting")) {
         slide.textFormatting = {};
     }
-    overlay = ifProp(slide.textFormatting, "overlay", true);
+    overlay = ifProp(slide.textFormatting, "overlay", false);
     if (overlay) {
         myobj.maxHeight = "100%";
     } else {

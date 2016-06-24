@@ -98,7 +98,7 @@ function makeCanvas(storyData, storyName, type) {
                 height = Math.max( height, $('.'+txtClass).outerHeight() );
             }
             if ( slides[i].hasOwnProperty('textFormatting')) {
-                var overlay = ifProp(slides[i].textFormatting, 'overlay', true);
+                var overlay = ifProp(slides[i].textFormatting, 'overlay', false);
             }
             if (type == "fullscreen") {
                 height = height + 40;
