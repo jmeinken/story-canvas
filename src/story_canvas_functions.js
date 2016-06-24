@@ -9,30 +9,14 @@ function moveBackward(slides) {
     //change slides
     position--;
     if (textPosition != 0) {
+        hideSlide(imgPosition,textPosition, true);
         textPosition--;
-        $('.sc-text').fadeOut(200, function() {
-            $('.sc-text').html(slides[imgPosition].text[textPosition]);
-            $('.sc-text').fadeIn(200);
-        });
+        showSlide(imgPosition,textPosition);
     } else {
-        var lastImgPosition = imgPosition;
+        hideSlide(imgPosition,textPosition, false);
         imgPosition--;
         textPosition = slides[imgPosition].text.length - 1;
-        $('.sc-text').fadeOut(200);
-        $('.sc-image-' + lastImgPosition).fadeOut(1000);
-        if (slides[imgPosition].hasOwnProperty('img')) {
-            $('.sc-image-' + imgPosition).fadeIn(1000, function() {
-                $('.sc-text').html(slides[imgPosition].text[textPosition]);
-                $('.sc-text').css( getTextFormatting(slides[imgPosition]) );
-                $('.sc-text').fadeIn(200);
-            });
-        } else {
-            setTimeout(function() {
-                $('.sc-text').html(slides[imgPosition].text[textPosition]);
-                $('.sc-text').css( getTextFormatting(slides[imgPosition]) );
-                $('.sc-text').fadeIn(200);
-            }, 1000);
-        }
+        showSlide(imgPosition,textPosition);
     }
     //update context
     $('.sc-forward').css({visibility : 'visible'});
@@ -46,32 +30,15 @@ function moveForward(slides) {
     //change slides
     position++;
     if (textPosition < slides[imgPosition].text.length - 1) {
+        hideSlide(imgPosition,textPosition, true);
         textPosition++;
-        $('.sc-text').fadeOut(200, function() {
-            $('.sc-text').html(slides[imgPosition].text[textPosition]);
-            $('.sc-text').fadeIn(200);
-        });
+        showSlide(imgPosition,textPosition);
     } else {
+        hideSlide(imgPosition,textPosition, false);
         var lastImgPosition = imgPosition;
         imgPosition++;
         textPosition = 0;
-        $('.sc-text').fadeOut(200);
-        $('.sc-image-' + lastImgPosition).fadeOut(1000);
-        if (slides[imgPosition].hasOwnProperty('img')) {
-            $('.sc-image-' + imgPosition).fadeIn(1000, function() {
-                $('.sc-text').css( getTextFormatting(slides[imgPosition]) );
-                $('.sc-text').html(slides[imgPosition].text[textPosition]);
-                $('.sc-image-' + imgPosition).css( getImageFormatting(slides[imgPosition]) );
-                $('.sc-text').fadeIn(200);
-            });
-        } else {
-            setTimeout(function() {
-                $('.sc-text').css( getTextFormatting(slides[imgPosition]) );
-                $('.sc-text').html(slides[imgPosition].text[textPosition]);
-                $('.sc-image-' + imgPosition).css( getImageFormatting(slides[imgPosition]) );
-                $('.sc-text').fadeIn(200);
-            }, 1000);
-        }
+        showSlide(imgPosition,textPosition);
     }
     //update context
     $('.sc-back').css({visibility : 'visible'});
@@ -109,9 +76,29 @@ function openFullScreen(parentDiv) {
 
  function configureWindow(slides, parentDiv) {
     $(parentDiv + ' .sc-image-' + imgPosition).show();
-    $(parentDiv + ' .sc-text').css( getTextFormatting(slides[imgPosition]) );
-    $(parentDiv + ' .sc-text').html(slides[imgPosition].text[textPosition]);
-    $(parentDiv + ' .sc-image-' + imgPosition).css( getImageFormatting(slides[imgPosition]) );
+    $('.sc-text').hide();
+    var textClass = "sc-image-" + imgPosition + '-text-' + textPosition;
+    $('.'+textClass).fadeIn(200);
+}
+
+function showSlide(slideNumber, textNumber, speed) {
+    var imgClass = 'sc-image-' + slideNumber
+    var textClass = "sc-image-" + slideNumber + '-text-' + textNumber;
+    if ( $('.'+imgClass).length ) {
+        $('.'+imgClass).stop().fadeIn(1000, function() {
+            $('.'+textClass).stop().fadeIn(200);
+        });
+    } else {
+        $('.'+textClass).stop().fadeIn(200);
+    }
+}
+
+function hideSlide(slideNumber, textNumber, repeat, speed) {
+    var textClass = "sc-image-" + slideNumber + '-text-' + textNumber;
+    if (!repeat) {
+        $('.sc-image-' + slideNumber).stop().fadeOut(400);
+    }
+    $('.'+textClass).stop().fadeOut(500);
 }
 
 

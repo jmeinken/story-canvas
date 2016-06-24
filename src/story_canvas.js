@@ -84,8 +84,15 @@ function makeCanvas(storyData, storyName, type) {
         if (slides[i].img) { 
             $(parentDiv+' .story-canvas').append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image-' + i + '" />');
         }
+        if (slides[i].text) { 
+            for (var j=0; j < slides[i].text.length; j++) {
+                var txtClass = 'sc-image-' + i + '-text-' + j;
+                $(parentDiv+' .story-canvas').append('<div " class="sc-text ' + txtClass + '" />');
+                $('.'+txtClass).css( getTextFormatting(slides[i]) );
+                $('.'+txtClass).html(slides[i].text[j]);
+            }
+        }
     }
-    $(parentDiv+' .story-canvas').append('<div class="sc-text"></div>');
     
     configureWindow(slides, parentDiv);
 
