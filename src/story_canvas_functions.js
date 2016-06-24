@@ -120,7 +120,7 @@ function hideSlide(slideNumber, textNumber, repeat, speed) {
 
 
     
-function getTextFormatting(slide) {
+function getTextFormatting(slide, displayType) {
     var myobj = {};
     if (!slide.hasOwnProperty("textFormatting")) {
         slide.textFormatting = {};
@@ -137,7 +137,11 @@ function getTextFormatting(slide) {
         myobj.transform = 'none';
     } else {
         myobj.top = 'auto';
-        myobj.bottom = '40px';
+        if (displayType == 'fullscreen') {
+            myobj.bottom = '40px';
+        } else {
+            myobj.bottom = 0;
+        }
         myobj.transform = 'none';
     }
     myobj.color = ifProp(slide.textFormatting, "color", "white");

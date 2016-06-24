@@ -93,13 +93,16 @@ function makeCanvas(storyData, storyName, type) {
             for (var j=0; j < slides[i].text.length; j++) {
                 var txtClass = 'sc-image-' + i + '-text-' + j;
                 $(parentDiv+' .story-canvas').append('<div " class="sc-text ' + txtClass + '" />');
-                $('.'+txtClass).css( getTextFormatting(slides[i]) );
-                $('.'+txtClass).html(slides[i].text[j]);
+                $(parentDiv+' .'+txtClass).css( getTextFormatting(slides[i], type) );
+                $(parentDiv+' .'+txtClass).html(slides[i].text[j]);
                 height = Math.max( height, $('.'+txtClass).outerHeight() );
             }
             if ( slides[i].hasOwnProperty('textFormatting')) {
                 var overlay = ifProp(slides[i].textFormatting, 'overlay', true);
             }
+            if (type == "fullscreen") {
+                height = height + 40;
+            } 
             if (!overlay) {
                 $(parentDiv+' .sc-image-box-'+i).css({bottom: height});
             }
