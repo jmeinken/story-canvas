@@ -137,7 +137,7 @@ function getTextFormatting(slide) {
         myobj.transform = 'none';
     } else {
         myobj.top = 'auto';
-        myobj.bottom = '25px';
+        myobj.bottom = '40px';
         myobj.transform = 'none';
     }
     myobj.color = ifProp(slide.textFormatting, "color", "white");
