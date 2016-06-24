@@ -63,11 +63,11 @@ function closeFullScreen(parentDiv) {
 }
 
 function openFullScreen(parentDiv) {
+    window.scrollTo(0, 0);
     $('html, body').css({
         'overflow': 'hidden',
         'height' : 'auto',
     });
-    window.scrollTo(0, 0);
     $(parentDiv).fadeIn();
     $('body').on('swipeup',function() {
         closeFullScreen(parentDiv);

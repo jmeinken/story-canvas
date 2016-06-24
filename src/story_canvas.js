@@ -141,17 +141,17 @@ function makeCanvas(storyData, storyName, type) {
 
         $( window ).on( "orientationchange", function( event ) {
             //some browsers will change scroll permission when orientation change
-            //setTimeout( function() {
-            //    for (var i=0; i < slides.length; i++) {
-            //        if (slides[i].text) { 
-            //            for (var j=0; j < slides[i].text.length; j++) {
-            //                var txtClass = 'sc-image-' + i + '-text-' + j;
-            //               $('.sc-container .'+txtClass).css( getTextFormatting(slides[i], 'fullscreen') );
-            //            }
-            //            $('.sc-container .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
-            //        }
-            //    }
-            //}, 1000);
+            setTimeout( function() {
+                for (var i=0; i < slides.length; i++) {
+                    if (slides[i].text) { 
+                        for (var j=0; j < slides[i].text.length; j++) {
+                            var txtClass = 'sc-image-' + i + '-text-' + j;
+                           $('.sc-container .'+txtClass).css( getTextFormatting(slides[i], 'fullscreen') );
+                        }
+                        $('.sc-container .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
+                    }
+                }
+            }, 1000);
             if (fullscreen) {
                 window.scrollTo(0, 0);
                 configureWindow(slides, parentDiv);
