@@ -64,10 +64,10 @@ function closeFullScreen(parentDiv) {
 
 function openFullScreen(parentDiv) {
     window.scrollTo(0, 0);
-    $('html, body').css({
-        'overflow': 'hidden',
-        'height' : 'auto',
-    });
+    //$('html, body').css({
+    //    'overflow': 'hidden',
+    //    'height' : 'auto'
+    //});
     $(parentDiv).fadeIn();
     $('body').on('swipeup',function() {
         closeFullScreen(parentDiv);
