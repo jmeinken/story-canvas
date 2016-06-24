@@ -42,11 +42,11 @@ body {
 .story-canvas .sc-text {
     position: absolute;
     top: 70%;
-    left: 0;
-    width: 100%;
+    left: 5%;
+    width: 90%;
     font-family: Georgia, serif;
     font-size: 20px;
-    padding: 5px 5px;
+    padding: 5px 0;
     text-align: center;
 }
 
