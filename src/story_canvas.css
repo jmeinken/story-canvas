@@ -124,7 +124,7 @@ body {
     left: 20%;
     width: 80%;
     height: 85%;
-    z-index: 2001;
+    z-index: 3000;
 }
 .sc-tap-backward-zone {
     position: absolute;
@@ -132,7 +132,7 @@ body {
     left: 0;
     width: 20%;
     height: 85%;
-    z-index: 2002;
+    z-index: 3000;
 }
 
 .sc-toolbar-right {
