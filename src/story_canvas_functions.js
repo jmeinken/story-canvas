@@ -64,7 +64,7 @@ function closeFullScreen(parentDiv) {
 
 function openFullScreen(parentDiv) {
     window.scrollTo(0, 0);
-    $('html, body, .sc-container, .story-canvas').css({
+    $('html, body, .sc-container, .story-canvas, .ui-page').css({
         'overflow': 'hidden',
         'height' : 'auto'
     });
