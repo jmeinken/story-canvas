@@ -83,7 +83,11 @@ var foxStory = {
 
 $( document ).ready(function() {
 	createStoryCanvas(foxStory, "fox-story", true);
-	
+        
+        $('#testing').click(function() {
+            window.scrollBy(0,-100);
+        });
+
 });
     
 </script>    
@@ -106,6 +110,7 @@ $( document ).ready(function() {
         </div>
 	
     </div>
+    <button id="testing" type="button">test</button>
 
 </body>
 </html>
