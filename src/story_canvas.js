@@ -151,9 +151,11 @@ function makeCanvas(storyData, storyName, type) {
                         $('.sc-container .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
                     }
                 }
-                window.scrollBy(0,-100);
+                if (fullscreen) {
+                    window.scrollBy(0,-100);
+                }
             }, 1000);
-            if (fullscreen) {
+            //if (fullscreen) {
                 //alert(parentDiv);
                 //closeFullScreen(parentDiv);
                 //openFullScreen(parentDiv);
@@ -165,8 +167,8 @@ function makeCanvas(storyData, storyName, type) {
                 //$('.story-canvas').scrollTop();
                 //window.scrollTo(0, 5);
                 //configureWindow(slides, parentDiv);
-                window.scrollBy(0,-100);
-            }
+            //    window.scrollBy(0,-100);
+            //}
         });
         
     }
