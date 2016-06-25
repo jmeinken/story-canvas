@@ -161,9 +161,10 @@ function makeCanvas(storyData, storyName, type) {
                 //$('body').scrollTop();
                 //$('.ui-page-active').scrollTop();
                 //$(parentDiv).scrollTop();
-                $('.story-canvas').scrollTop();
+                //$('.story-canvas').scrollTop();
                 //window.scrollTo(0, 5);
                 //configureWindow(slides, parentDiv);
+                window.scrollBy(0,-100)
             }
         });
         
