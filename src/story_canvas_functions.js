@@ -78,6 +78,7 @@ function openFullScreen(parentDiv) {
     if (tryFullScreen) {
         startFullScreen();
     }
+    fullscreen = true;
 }
 
  function configureWindow(slides, parentDiv) {
