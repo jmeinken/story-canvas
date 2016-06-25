@@ -154,7 +154,7 @@ function makeCanvas(storyData, storyName, type) {
                 if (fullscreen && event.orientation == 'portrait') {
                     window.scrollBy(0,-100);
                 }
-            }, 1000);
+            }, 200);
             //if (fullscreen) {
                 //alert(parentDiv);
                 //closeFullScreen(parentDiv);
