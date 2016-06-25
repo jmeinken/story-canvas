@@ -151,7 +151,7 @@ function makeCanvas(storyData, storyName, type) {
                         $('.sc-container .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
                     }
                 }
-                if (fullscreen) {
+                if (fullscreen && event.orientation == 'portrait') {
                     window.scrollBy(0,-100);
                 }
             }, 1000);
