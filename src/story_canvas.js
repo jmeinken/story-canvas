@@ -151,6 +151,7 @@ function makeCanvas(storyData, storyName, type) {
                         $('.sc-container .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
                     }
                 }
+                window.scrollBy(0,-100);
             }, 1000);
             if (fullscreen) {
                 //alert(parentDiv);
