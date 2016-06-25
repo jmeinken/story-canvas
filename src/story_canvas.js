@@ -156,11 +156,12 @@ function makeCanvas(storyData, storyName, type) {
                 //alert(parentDiv);
                 //closeFullScreen(parentDiv);
                 //openFullScreen(parentDiv);
-                $(window).scrollTop();
-                $('html').scrollTop();
-                $('body').scrollTop();
-                $('.ui-page-active').scrollTop();
-                $(parentDiv).scrollTop();
+                //$(window).scrollTop();
+                //$('html').scrollTop();
+                //$('body').scrollTop();
+                //$('.ui-page-active').scrollTop();
+                //$(parentDiv).scrollTop();
+                $('.story-canvas').scrollTop();
                 //window.scrollTo(0, 5);
                 //configureWindow(slides, parentDiv);
             }
