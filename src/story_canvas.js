@@ -157,7 +157,7 @@ function makeCanvas(storyData, storyName, type) {
                 //closeFullScreen(parentDiv);
                 //openFullScreen(parentDiv);
                 //$('body').scrollTop();
-                window.scrollTo(0, 1);
+                window.scrollTo(0, 5);
                 //configureWindow(slides, parentDiv);
             }
         });
