@@ -50,6 +50,7 @@ function moveForward(parentDiv, slides) {
 }
 
 function closeFullScreen(parentDiv) {
+	$('#blackout').hide();
     $(parentDiv).hide();
     $('html, body').css({
         'overflow': 'auto',
@@ -78,6 +79,7 @@ function openFullScreen(parentDiv) {
     if (tryFullScreen) {
         startFullScreen();
     }
+    $('#blackout').show();
     fullscreen = true;
 }
 
@@ -138,11 +140,11 @@ function getTextFormatting(slide, displayType) {
         myobj.transform = 'none';
     } else {
         myobj.top = 'auto';
-        if (displayType == 'fullscreen') {
-            myobj.bottom = '40px';
-        } else {
+        //if (displayType == 'fullscreen') {
+        //    myobj.bottom = '40px';
+        //} else {
             myobj.bottom = 0;
-        }
+        //}
         myobj.transform = 'none';
     }
     myobj.color = ifProp(slide.textFormatting, "color", "white");
@@ -167,7 +169,7 @@ function getImageFormatting(slide, type, i, j) {
         height = height + 40;
     } 
     if (!overlay) {
-        myobj.bottom = height;
+        myobj.bottom = '60px';
     }
     return myobj;
 }

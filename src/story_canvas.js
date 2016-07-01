@@ -56,6 +56,7 @@ function makeCanvas(storyData, storyName, type) {
     }
     if (type == "fullscreen") {
         var parentDiv = "#" + storyName + "-fullscreen";
+        $('body').append('<div id="blackout">&nbsp;</div>');
         $('body').append('<div id="' + storyName + '-fullscreen" class="sc-container ' + storyName + '"></div>');
         var toolbarRight = '<a href="#" class="sc-close"><i class="fa fa-times" aria-hidden="true"></i></a>';
     } else {

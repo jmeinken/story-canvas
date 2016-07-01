@@ -4,6 +4,17 @@ body {
     padding: 0;
 }
 
+#blackout {
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	z-index: 999;
+	display:none;
+	
+}
+
 .sc-container{
    position: absolute;
    top: 0; /* Header Height */
@@ -29,7 +40,7 @@ body {
    bottom: 0; /* Footer Height */
    width: 100%;
    background-color: #cc3300;
-   z-index: 1000;
+   z-index: 998;
    color: white;
    font-family: "Arial Black", Gadget, sans-serif;
 }
@@ -41,11 +52,12 @@ body {
 
 .story-canvas .sc-text {
     position: absolute;
-    top: 70%;
+    bottom: 0;
     left: 5%;
     width: 90%;
     font-family: Georgia, serif;
     font-size: 20px;
+	min-height: 1.5em;
     padding: 5px 0;
     text-align: center;
 }
