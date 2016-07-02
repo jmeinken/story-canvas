@@ -10,6 +10,8 @@
     <!-- jQuery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" media="all" />
+	<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 	<script src="jquery-additions.js"></script>
     <!-- FontAwesome -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
@@ -84,6 +86,9 @@ var foxStory = {
 
 $( document ).ready(function() {
 	createStoryCanvas(foxStory, "fox-story", true);
+	
+	$('#drag-me').draggable();
+	
 });
     
 </script>    
@@ -100,6 +105,8 @@ $( document ).ready(function() {
         <div>
             <br><br>
             <a href="#" class="fox-story-open">Open Story Canvas</a>
+            
+
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae ultricies nisi. Vestibulum porttitor, enim sit amet cursus feugiat, nibh enim posuere nulla, ut auctor dui nisl eu purus. Sed cursus quam et mauris iaculis, sed tempor magna porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed leo arcu, imperdiet nec commodo et, ultrices id dui. Integer felis massa, ultrices varius neque non, porta bibendum purus. Sed ipsum risus, porttitor vitae nisi ac, malesuada convallis est. Curabitur consectetur accumsan felis, vitae sollicitudin quam laoreet vitae. Mauris nec libero a tellus sagittis auctor eget maximus orci. Vivamus massa dolor, viverra a vestibulum sit amet, sodales ut nunc. Mauris scelerisque eleifend enim, vitae sodales felis vestibulum a. Proin ante dolor, tristique ut erat eu, semper laoreet dui. Phasellus semper arcu ut ante efficitur, nec tempus mi interdum. Vivamus sodales commodo magna non congue. Curabitur eu dolor id sem feugiat convallis.</p>
             <p>Sed molestie orci blandit velit malesuada, et varius mauris volutpat. Integer id nisi nec libero malesuada sagittis. Proin mattis dapibus maximus. Proin tincidunt urna sit amet ligula volutpat, ac iaculis tellus rhoncus. Integer pretium sem a felis vulputate venenatis. Curabitur eget consectetur orci. Maecenas eleifend malesuada quam vel mattis. Sed vel nisi mi. Phasellus tellus lorem, aliquet eget neque nec, efficitur hendrerit metus. Nunc congue, sapien ac semper dapibus, leo leo gravida diam, nec luctus orci dui non libero. Sed suscipit sapien eget risus finibus, non congue quam dictum. Proin cursus nisi sed tortor vestibulum malesuada. Praesent sit amet convallis sapien.</p>
             <p>Aliquam faucibus ac neque in eleifend. Interdum et malesuada fames ac ante ipsum primis in faucibus. In hac habitasse platea dictumst. Nunc sollicitudin justo at commodo laoreet. Nulla vitae lectus risus. Aenean non ultricies diam. Cras nec orci id nisl pretium elementum. Fusce finibus, libero sed suscipit faucibus, nisi ante interdum nisl, vel scelerisque erat mi id neque. Pellentesque elit diam, consectetur et placerat eu, tristique ut mauris. Quisque felis nisi, tristique eget nulla quis, blandit tempus neque. Nullam et consequat lacus.</p>

@@ -71,6 +71,9 @@ function makeCanvas(storyData, storyName, type) {
         tapBackwardZone +
         '<div class="sc-toolbar">' +
             '<div class="sc-toolbar-right">' +
+	        	'<a href="#" class="sc-zoom"><i class="fa fa-search-plus" aria-hidden="true"></i></a>' +
+	        	'<a href="#" class="sc-unzoom"><i class="fa fa-search-minus" aria-hidden="true"></i></a>' +
+	        	'&nbsp;&nbsp;&nbsp;' +
 				'<a href="#" class="sc-restart"><i class="fa fa-fast-backward" aria-hidden="true"></i></a>' +
 				'&nbsp;&nbsp;&nbsp;' +
                 toolbarRight +
@@ -87,7 +90,7 @@ function makeCanvas(storyData, storyName, type) {
     for (var i=0; i < slides.length; i++) {
         if (slides[i].img) { 
             $(parentDiv+' .story-canvas').append('<div class="sc-image-box sc-image-box-' +i + '"></div>');
-            $(parentDiv+' .story-canvas .sc-image-box-'+i).append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image-' + i + '" />');
+            $(parentDiv+' .story-canvas .sc-image-box-'+i).append('<img src="' + slides[i].img + '" alt="' + slides[i].alt + '" class="sc-image sc-image-' + i + '" />');
         }
         if (slides[i].text) { 
             
@@ -97,7 +100,8 @@ function makeCanvas(storyData, storyName, type) {
                 $(parentDiv+' .'+txtClass).css( getTextFormatting(slides[i], type) );
                 $(parentDiv+' .'+txtClass).html(slides[i].text[j]);
             }
-            $(parentDiv+' .sc-image-box-'+i).css( getImageFormatting(slides[i], type, i, j) );
+            $(parentDiv+' .sc-image-box-'+i).css( getImageBoxFormatting(slides[i], type, i, j) );
+            //$(parentDiv+' .sc-image-'+i).css( getImageFormatting(parentDiv, i) );
         }
     }
     
@@ -143,15 +147,15 @@ function makeCanvas(storyData, storyName, type) {
         $( window ).on( "orientationchange", function( event ) {
             //some browsers will change scroll permission when orientation change
             setTimeout( function() {
-                for (var i=0; i < slides.length; i++) {
-                    if (slides[i].text) { 
-                        for (var j=0; j < slides[i].text.length; j++) {
-                            var txtClass = 'sc-image-' + i + '-text-' + j;
-                           $('.sc-container .'+txtClass).css( getTextFormatting(slides[i], 'fullscreen') );
-                        }
-                        $('.sc-container .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
-                    }
-                }
+                //for (var i=0; i < slides.length; i++) {
+                //    if (slides[i].text) { 
+                //        for (var j=0; j < slides[i].text.length; j++) {
+                //            var txtClass = 'sc-image-' + i + '-text-' + j;
+                //           $('.sc-container .'+txtClass).css( getTextFormatting(slides[i], 'fullscreen') );
+                //        }
+                //        $('.sc-container .sc-image-box-'+i).css( getImageFormatting(slides[i], 'fullscreen', i, j) );
+                //    }
+                //}
                 if (fullscreen && event.orientation == 'portrait') {
                     window.scrollBy(0,-100);
                 }
@@ -175,7 +179,7 @@ function makeCanvas(storyData, storyName, type) {
     }
 
     /*
-     * ATTACH EVENTS FOR STORY CANVAS (BOTH FULL SCREEN AND EMBEDDED
+     * ATTACH EVENTS FOR STORY CANVAS (BOTH FULL SCREEN AND EMBEDDED)
      */
     $(parentDiv+' .sc-forward').click(function() {
         moveForward(parentDiv, slides);
@@ -188,16 +192,77 @@ function makeCanvas(storyData, storyName, type) {
     });
 
     $(parentDiv+' .sc-restart').click(function() {
-        hideSlide(imgPosition,textPosition, false);
+        hideSlide(parentDiv, imgPosition,textPosition, false);
         textPosition = 0;
         imgPosition = 0;
         position = 1;
         $('.sc-back').css({visibility: 'hidden'});
         $('.sc-forward').css({visibility: 'visible'});
-	$('.sc-position').text(position);
+        $('.sc-position').text(position);
         showSlide(imgPosition,textPosition, parentDiv, slides);
         return false;
     });
+    
+    $(parentDiv+' .sc-zoom').click(function() {
+    	zoom(parentDiv, imgPosition)
+    });
+    
+    $(parentDiv+' .sc-unzoom').click(function() {
+    	unzoom(parentDiv, imgPosition);
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+    function bindZoomFeaturesOld() {
+    	$(parentDiv+' .sc-zoom').click(function() {
+            $(parentDiv+' .sc-image-'+imgPosition)
+                .css({height: height, width: width})
+                .css({maxWidth: 'none', maxHeight: 'none', zIndex: 5000, transform:'none', top: '0', left: '0'})
+                .draggable();
+            $(parentDiv+' .sc-zoom').replaceWith('<a href="#" class="sc-unzoom"><i class="fa fa-search-minus" aria-hidden="true"></i></a>');
+            bindZoomFeatures();
+        });
+        $(parentDiv+' .sc-unzoom').click(function() {
+            $(parentDiv+' .sc-image-'+imgPosition)
+            	.draggable( "destroy" )
+                .css({maxWidth: '100%', maxHeight: '100%', zIndex: 1000, top: '50%', left: '50%', transform:'translate(-50%, -50%)'})
+                .css({width: 'auto', height: 'auto'});
+            $(parentDiv+' .sc-unzoom').replaceWith('<a href="#" class="sc-zoom"><i class="fa fa-search-plus" aria-hidden="true"></i></a>');
+            bindZoomFeatures();
+        });
+    }
+    
+    function bindZoomFeatures(parentDiv, imgPosition) {
+    	$(parentDiv+' .sc-zoom').unbind().click(function() {
+    		img = $(parentDiv+' .sc-image-'+imgPosition).get( 0 );
+    		imgBox = $(parentDiv+' .sc-image-box-'+imgPosition).get( 0 );
+    		height = img.naturalHeight;
+    		width = img.naturalWidth;
+    		boxHeight = imgBox.naturalHeight;
+    		boxWidth = imgBox.naturalWidth;
+            $(parentDiv+' .sc-image-'+imgPosition).draggable()
+                .css({maxWidth: 'none', maxHeight: 'none', width: width, height: height});
+            $(parentDiv+' .sc-zoom').replaceWith('<a href="#" class="sc-unzoom"><i class="fa fa-search-minus" aria-hidden="true"></i></a>');
+            bindZoomFeatures(parentDiv, imgPosition);
+        });
+        $(parentDiv+' .sc-unzoom').unbind().click(function() {
+            $(parentDiv+' .sc-image-'+imgPosition).draggable( "destroy" )
+                .css({maxWidth: '100%', maxHeight: '100%'})
+                .css({width: 'auto', height: 'auto', position: 'static', left: 'auto', top: 'auto'});
+            $(parentDiv+' .sc-unzoom').replaceWith('<a href="#" class="sc-zoom"><i class="fa fa-search-plus" aria-hidden="true"></i></a>');
+            bindZoomFeatures(parentDiv, imgPosition);
+        });
+    }
+    
+    */
+    //bindZoomFeatures(parentDiv, imgPosition);
+    
     
     if (!is_touch_device()) {
         $(parentDiv).mouseout(function() {
@@ -215,8 +280,43 @@ function makeCanvas(storyData, storyName, type) {
             $('.sc-toolbar').show();
             $('.story-canvas').stop().css({top : '34px'});
         });
+        
+        //$(parentDiv + ' .sc-image').click(function() {
+        //	if (imgZoomed) {
+        //		unzoom(parentDiv, imgPosition);
+        //	} else {
+        //		zoom(parentDiv, imgPosition);
+        //	}
+        //	
+        //});
+        
+        
+        $(parentDiv + ' .sc-image').css({cursor: 'zoom-in'});
+        var isDragging = false;
+        $(parentDiv + ' .sc-image')
+        .mousedown(function() {
+            isDragging = false;
+        })
+        .mousemove(function() {
+            isDragging = true;
+         })
+        .mouseup(function() {
+            var wasDragging = isDragging;
+            isDragging = false;
+            if (!wasDragging) {
+            	if (imgZoomed) {
+            		unzoom(parentDiv, imgPosition);
+            	} else {
+            		zoom(parentDiv, imgPosition);
+            	}
+            }
+        });
+        
+        
+        
     } else {
     
+    	/*
         $(parentDiv+' .sc-tap-forward-zone').on('swipeleft',function() {
             var lastImg = slides.length - 1;
             var lastText = slides[lastImg].text.length - 1
@@ -229,6 +329,8 @@ function makeCanvas(storyData, storyName, type) {
                 moveBackward(parentDiv, slides);
             }
         });
+        */
+        /*
         $(parentDiv+' .sc-tap-forward-zone').on('tap',function() {
             var lastImg = slides.length - 1;
             var lastText = slides[lastImg].text.length - 1
@@ -241,6 +343,42 @@ function makeCanvas(storyData, storyName, type) {
                 moveBackward(parentDiv, slides);
             }
         });
+        $(parentDiv+' .sc-tap-forward-zone').dblclick(function() {
+        	alert("ok");
+        });
+        */
+    	
+    	$(parentDiv+' .sc-tap-backward-zone').on('tap',function() {
+            if (imgPosition != 0 || textPosition != 0) {
+                moveBackward(parentDiv, slides);
+            }
+        });
+        
+        var tapped=false
+        $(parentDiv+' .sc-tap-forward-zone').on("touchstart",function(e){
+            if(!tapped){ //if tap is not set, set up single tap
+              tapped=setTimeout(function(){
+                  tapped=null;
+                //insert things you want to do when single tapped
+                  var lastImg = slides.length - 1;
+                  var lastText = slides[lastImg].text.length - 1
+                  if (imgPosition != lastImg || textPosition != lastText) {
+                      moveForward(parentDiv, slides);
+                  }
+              },300);   //wait 300ms then run single click code
+            } else {    //tapped within 300ms of last tap. double tap
+              clearTimeout(tapped); //stop single tap callback
+              tapped=null
+              //insert things you want to do when double tapped
+              if (imgZoomed) {
+	          		unzoom(parentDiv, imgPosition);
+	          	} else {
+	          		zoom(parentDiv, imgPosition);
+	          	}
+            }
+            //e.preventDefault()
+        });
+        
    }
    
 };
