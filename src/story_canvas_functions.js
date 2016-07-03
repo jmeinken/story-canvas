@@ -5,6 +5,8 @@ var position = 1;
 var fullscreen = false;
 var tryFullScreen = false;
 var imgZoomed = false;
+var backgroundColor = "#cc3300";
+var toolbarColor = "#661a00";
 
 
 function moveBackward(parentDiv, slides) {
@@ -22,6 +24,7 @@ function moveBackward(parentDiv, slides) {
     }
     //update context
     $('.sc-forward').css({visibility : 'visible'});
+    $('.sc-restart').css({color : backgroundColor});
     if (imgPosition == 0 && textPosition == 0) {
         $('.sc-back').css({visibility : 'hidden'});
     }
@@ -46,6 +49,7 @@ function moveForward(parentDiv, slides) {
     $('.sc-back').css({visibility : 'visible'});
     if (imgPosition == slides.length - 1 && textPosition == slides[imgPosition].text.length - 1) {
         $('.sc-forward').css({visibility : 'hidden'});
+        $('.sc-restart').css({color : 'white'});
     }
     $('.sc-position').text(position);
 }
@@ -78,10 +82,8 @@ function openFullScreen(parentDiv) {
     //});
     //$('body').on('swipedown',function() {
     //    closeFullScreen(parentDiv);
-    //});
-    if (tryFullScreen) {
-        startFullScreen();
-    }
+    //});  
+    
     $('#blackout').show();
     unzoom(parentDiv, imgPosition);
     fullscreen = true;
@@ -145,6 +147,8 @@ function zoom(parentDiv, imgPosition) {
 		$('.sc-tap-forward-zone').hide();
 		$('.sc-tap-backward-zone').hide();
 		$('.sc-unzoom').show();
+		//$('body').unbind();
+	    //$('body').unbind();
 		imgZoomed = true;
 	}
 }
@@ -160,6 +164,11 @@ function unzoom(parentDiv, imgPosition) {
 	$('.sc-zoom').show();
 	$('.sc-tap-forward-zone').show();
 	$('.sc-tap-backward-zone').show();
+	//$('body').on('swipeup',function() {
+    //    closeFullScreen(parentDiv);
+    //});
+    //$('body').on('swipedown',function() {
+    //    closeFullScreen(parentDiv);
 	imgZoomed = false;
 }
 
@@ -240,7 +249,7 @@ function getImageBoxFormatting(slide, type, i, j) {
         height = height + 40;
     } 
     if (!overlay) {
-        myobj.bottom = '60px';
+        myobj.bottom = '55px';
     }
     return myobj;
 }

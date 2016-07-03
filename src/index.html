@@ -7,12 +7,17 @@
     <meta name="description" content="Story Canvas Example">
     <meta name="author" content="John Meinken">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"> -->
+
+	
     <!-- jQuery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" media="all" />
 	<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 	<script src="jquery-additions.js"></script>
+	<!-- Hammer -->
+	<script src="hammer.min.js"></script>
     <!-- FontAwesome -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
     <!-- Story Canvas -->
@@ -20,49 +25,63 @@
     <script src="story_canvas.js"></script>
     <link rel="stylesheet" href="story_canvas.css">
 
+
+
 <script type="text/javascript">
 
 var foxStory = {
     slides: [
         {
             text: [
-                'The Sly Fox<br><br><br><div style="font-size:20px;text-align:center">by John Meinken</div>',
+                'A screen with only text<br><br><br><span style="font-size:10px;text-align:center;color: yellow;">can apply any formatting</span>',
             ],
             textFormatting: { 
                 overlay: true,
                 center: true,
-                fontSize: '50px',
+                fontSize: '30px',
             }
         },
         {
             img: 'img/fox.jpg',
             alt: 'fox',
             text: [
-                'The fox came out.',
-                'Then she walked and walked. And walked and walked. And walked and walked. And walked and walked.And walked and walked.And walked and walked.And walked and walked.'
+                'Text on bottom has<br>space for two lines.',
+                'If you go over two lines,<br>it may start to cover over the image (depending on dimensions).<br>So you\'ll have to be careful.'
             ],
             textFormatting: { 
                 color: 'white',
             }
         },
         {
+            img: 'img/street.jpg',
+            alt: 'street',
+            text: [
+                'Here is how a normal shaped image looks.',
+            ]
+        },
+        {
             img: 'img/street2.jpg',
             alt: 'street',
             text: [
-                'She came to a street.',
-                'The air was cold and damp.',
-                'What did she find there?'
+                'Here is how a wide image looks.',
+            ]
+        },
+        {
+            img: 'img/woods.jpg',
+            alt: 'woods',
+            text: [
+                'Here is how a tall image looks.',
             ]
         },
         {
             img: 'img/street.jpg',
-            alt: 'street with sky',
+            alt: 'woods',
             text: [
-                'She found the night sky.',
+                'Here is how overlaid text looks.<br>The image takes the full canvas.' + 
+                '<br><br>Zooming will temporarily hide text.',
             ],
             textFormatting: { 
-                top: '120px',
-                fontSize: '35px',
+                top: '10%',
                 overlay: true,
             }
         },
@@ -114,6 +133,7 @@ $( document ).ready(function() {
 	
     </div>
     
+    <img src="img/fox.jpg" />
 
 </body>
 </html>

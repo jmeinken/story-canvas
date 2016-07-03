@@ -6,6 +6,9 @@
 
 function createStoryCanvas(storyData, storyName, embed) {
 	embed = embed || false;
+	if ( storyData.globalSettings.hasOwnProperty("tryFullScreen") ) {
+        tryFullScreen = storyData.globalSettings.tryFullScreen;
+    }
 	if (embed) {
             makeCanvas(storyData, storyName, 'embedded');
 	}
@@ -17,15 +20,15 @@ function createStoryCanvas(storyData, storyName, embed) {
                 $('.sc-embedded').css({backgroundColor: color});
                 $('.sc-toolbar').css({color: color});
                 $('.sc-toolbar a').css({color: color});
+                backgroundColor = color;
+                
             }
             if ( storyData.globalSettings.hasOwnProperty("toolbarColor") ) {
                 color = storyData.globalSettings.toolbarColor;
                 $('.sc-left-nav a').css({color: color});
                 $('.sc-right-nav a').css({color: color});
                 $('.sc-toolbar').css({backgroundColor: color});
-            }
-            if ( storyData.globalSettings.hasOwnProperty("tryFullScreen") ) {
-                tryFullScreen = storyData.globalSettings.tryFullScreen;
+                toolbarColor = color;
             }
         }
 }
@@ -45,11 +48,13 @@ function makeCanvas(storyData, storyName, type) {
     }
     var leftNav = '';
     var rightNav = '';
+    var fsTool = '';
+    var closeTool = '';
     var tapForwardZone = '';
     var tapBackwardZone = '';
     if ( !is_touch_device() ) {
-        leftNav = '<div class="sc-left-nav"><a href="#" class="sc-back"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></div>';
-        rightNav = '<div class="sc-right-nav"><a href="#" class="sc-forward"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>';
+        leftNav = '<div class="sc-left-nav"><a href="#" class="sc-back" title="back"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></div>';
+        rightNav = '<div class="sc-right-nav"><a href="#" class="sc-forward" title="forward"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>';
     } else {
         tapForwardZone = '<div class="sc-tap-forward-zone"></div>';
         tapBackwardZone = '<div class="sc-tap-backward-zone"></div>';
@@ -58,12 +63,15 @@ function makeCanvas(storyData, storyName, type) {
         var parentDiv = "#" + storyName + "-fullscreen";
         $('body').append('<div id="blackout">&nbsp;</div>');
         $('body').append('<div id="' + storyName + '-fullscreen" class="sc-container ' + storyName + '"></div>');
-        var toolbarRight = '<a href="#" class="sc-close"><i class="fa fa-times" aria-hidden="true"></i></a>';
+        if (!is_touch_device()) {
+        	fsTool = '<a href="#" class="sc-go-fullscreen" title="fullscreen mode"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;';
+        }
+        var closeTool = '<a href="#" class="sc-close" title="close window"><i class="fa fa-times" aria-hidden="true"></i></a>';
     } else {
         var parentDiv = "#" + storyName + "-container";
         $(parentDiv).addClass(storyName);
         $(parentDiv).addClass('sc-embedded');
-        var toolbarRight = '<a href="#" class="' + storyName + '-open"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>';
+        var closeTool = '<a href="#" class="' + storyName + '-open" title="expand"><i class="fa fa-expand" aria-hidden="true"></i></a>';
     }
     $(parentDiv).html(
         '<div class="story-canvas"></div>' +
@@ -71,14 +79,15 @@ function makeCanvas(storyData, storyName, type) {
         tapBackwardZone +
         '<div class="sc-toolbar">' +
             '<div class="sc-toolbar-right">' +
-	        	'<a href="#" class="sc-zoom"><i class="fa fa-search-plus" aria-hidden="true"></i></a>' +
-	        	'<a href="#" class="sc-unzoom"><i class="fa fa-search-minus" aria-hidden="true"></i></a>' +
+            	fsTool +
+	        	'<a href="#" class="sc-zoom" title="zoom image"><i class="fa fa-search-plus" aria-hidden="true"></i></a>' +
+	        	'<a href="#" class="sc-unzoom" title="unzoom"><i class="fa fa-search-minus" aria-hidden="true"></i></a>' +
 	        	'&nbsp;&nbsp;&nbsp;' +
-				'<a href="#" class="sc-restart"><i class="fa fa-fast-backward" aria-hidden="true"></i></a>' +
-				'&nbsp;&nbsp;&nbsp;' +
-                toolbarRight +
+                closeTool +
             '</div>' +
             '<div class="sc-toolbar-left">' +
+                '<a href="#" class="sc-restart" title="start over"><i class="fa fa-fast-backward" aria-hidden="true"></i></a>' +
+			    '&nbsp;&nbsp;&nbsp;' +
                 '<span class="sc-position">1</span>/' + slideCount +
             '</div>' +
         '</div>' +
@@ -121,6 +130,12 @@ function makeCanvas(storyData, storyName, type) {
         $('.sc-close').click(function() {
             closeFullScreen(parentDiv);
             return false;
+        });
+        
+        $('.sc-go-fullscreen').click(function() {
+        	if (tryFullScreen) {
+                toggleFullScreen();
+            }
         });
         
         $(document).keydown(function(e){
@@ -199,6 +214,7 @@ function makeCanvas(storyData, storyName, type) {
         $('.sc-back').css({visibility: 'hidden'});
         $('.sc-forward').css({visibility: 'visible'});
         $('.sc-position').text(position);
+        $('.sc-restart').css({color : backgroundColor});
         showSlide(imgPosition,textPosition, parentDiv, slides);
         return false;
     });
@@ -352,6 +368,24 @@ function makeCanvas(storyData, storyName, type) {
             if (imgPosition != 0 || textPosition != 0) {
                 moveBackward(parentDiv, slides);
             }
+        });
+    	$(parentDiv+' .sc-image').on("touchstart",function(e){
+            if(!tapped){ //if tap is not set, set up single tap
+              tapped=setTimeout(function(){
+                  tapped=null;
+                //insert things you want to do when single tapped
+              },300);   //wait 300ms then run single click code
+            } else {    //tapped within 300ms of last tap. double tap
+              clearTimeout(tapped); //stop single tap callback
+              tapped=null
+              //insert things you want to do when double tapped
+              if (imgZoomed) {
+	          		unzoom(parentDiv, imgPosition);
+	          	} else {
+	          		zoom(parentDiv, imgPosition);
+	          	}
+            }
+            //e.preventDefault()
         });
         
         var tapped=false
