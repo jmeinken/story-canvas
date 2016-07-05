@@ -1,4 +1,220 @@
 
+sc.templateEngine = function (templateId, args) {
+	args = args || {};
+	var template = $('#'+templateId).html();
+	for (arg in args) {
+		var str = "{{"+arg+"}}"
+		template = template.split(str).join(args[arg]);
+	}
+	return template;
+}
+
+
+
+sc.getTextFormatting = function (slide, displayType) {
+	tf = slide.textFormatting;
+	myobj = {
+		fontSize: tf.fontSize,
+		color: tf.color,
+		backgroundColor: tf.backgroundColor,
+		opacity: tf.opacity,
+		transform: tf.transform,
+		top: tf.top,
+		bottom: tf.bottom
+	};
+    return myobj;
+}
+
+sc.getImageBoxFormatting = function getImageBoxFormatting(slide, displayType) {
+    var myobj = {};
+    if (!slide.textFormatting.overlay) {
+        myobj.bottom = '55px';
+    }
+    return myobj;
+}
+
+
+
+
+
+sc.openFullWindow = function (canvasName) {
+    //window.scrollTo(0, 0);
+    $('html, body').css({
+        'overflow': 'hidden',
+    });
+    $('#'+canvasName+'-full-window').fadeIn();
+    //$('body').on('swipeup',function() {
+    //    closeFullScreen(parentDiv);
+    //});
+    //$('body').on('swipedown',function() {
+    //    closeFullScreen(parentDiv);
+    //});  
+    
+    $('#blackout').show();
+    sc.unzoom(canvas, canvas.embeddedDiv);
+    canvas.fullWindowShowing = true;
+    
+}
+
+
+sc.closeFullWindow = function (canvasName) {
+	$('#blackout').hide();
+    $('#'+canvasName+'-full-window').hide();
+    $('html, body').css({
+        'overflow': 'auto',
+    });
+    $('body').unbind();
+    sc.unzoom(canvas, canvas.fullWindowDiv);
+    endFullScreen();
+    canvas.fullWindowShowing = false;
+}
+
+sc.moveBackward = function (canvas) {
+	if (canvas.currentSlidePosition == 1) {
+		return;
+	}
+    //change slides
+	canvas.currentSlidePosition--;
+    if (canvas.currentTextPosition != 0) {
+        sc.hideSlide(canvas);
+        canvas.currentTextPosition--;
+        sc.showSlide(canvas);
+    } else {
+        sc.hideSlide(canvas);
+        canvas.currentImagePosition--;
+        canvas.currentTextPosition = canvas.slides[canvas.currentImagePosition].text.length - 1;
+        sc.showSlide(canvas);
+    }
+    //update context
+    $('.sc-forward').css({visibility : 'visible'});
+    $('.sc-restart').css({color : canvas.globalSettings.backgroundColor});
+    if (canvas.currentImagePosition == 0 && canvas.currentTextPosition == 0) {
+        $('.sc-back').css({visibility : 'hidden'});
+    }
+    $('.sc-position').text(canvas.currentSlidePosition);
+}
+
+sc.moveForward = function (canvas) {
+	if (canvas.currentSlidePosition == canvas.slideCount) {
+		return;
+	}
+    //change slides
+    canvas.currentSlidePosition++;
+    if (canvas.currentTextPosition < canvas.slides[canvas.currentImagePosition].text.length - 1) {
+        sc.hideSlide(canvas);
+        canvas.currentTextPosition++;
+        sc.showSlide(canvas);
+    } else {
+        sc.hideSlide(canvas);
+        canvas.currentImagePosition++;
+        canvas.currentTextPosition = 0;
+        sc.showSlide(canvas);
+    }
+    //update context
+    $('.sc-back').css({visibility : 'visible'});
+    if (canvas.currentImagePosition == canvas.slides.length - 1 
+    		&& canvas.currentTextPosition == canvas.slides[canvas.currentImagePosition].text.length - 1) {
+        $('.sc-forward').css({visibility : 'hidden'});
+        $('.sc-restart').css({color : 'white'});
+    }
+    $('.sc-position').text(canvas.currentSlidePosition);
+}
+
+
+sc.showSlide = function (canvas) {
+    var imgClass = 'sc-image-' + canvas.currentImagePosition
+    var textClass = "sc-image-" + canvas.currentImagePosition + '-text-' + canvas.currentTextPosition;
+    if ( $('.'+imgClass).length ) {
+        $('.'+imgClass).parent().stop().fadeIn(500, function() {
+            $('.'+textClass).stop().fadeIn(400);
+        });
+    } else {
+        $('.'+textClass).stop().fadeIn(400);
+    }
+}
+
+sc.hideSlide = function (canvas) {
+	var imgClass = 'sc-image-' + canvas.currentImagePosition
+    var textClass = "sc-image-" + canvas.currentImagePosition + '-text-' + canvas.currentTextPosition;
+    $('.'+imgClass).parent().stop().fadeOut(200);
+    $('.'+textClass).stop().fadeOut(200);
+    sc.unzoom(canvas, canvas.fullWindowDiv);
+    sc.unzoom(canvas, canvas.embeddedDiv);
+}
+
+sc.zoom = function (canvas, parentDiv) {
+	var imgDiv = parentDiv+' .sc-image-'+canvas.currentImagePosition
+	img = $(imgDiv).get( 0 );
+	if (img) {
+		imgHeight = img.naturalHeight;
+		imgWidth = img.naturalWidth;
+		boxHeight = $(img).parent().height();
+		boxWidth = $(img).parent().width();
+		height = (boxHeight-imgHeight)/2;
+		width = (boxWidth-imgWidth)/2;
+        $(imgDiv)
+            .css({maxWidth: 'none', maxHeight: 'none', transform:'none', zIndex: 5000})
+            .draggable();
+        $(imgDiv)
+        	.css({top: height, left: width, margin: 0, height: imgHeight, width: imgWidth, cursor: 'move'});
+        $(parentDiv+' .sc-zoom').hide();
+		$(parentDiv+' .sc-tap-forward-zone').hide();
+		$(parentDiv+' .sc-tap-backward-zone').hide();
+		$(parentDiv+' .sc-unzoom').show();
+		//$('body').unbind();
+	    //$('body').unbind();
+		canvas.imageZoomed = true;
+	}
+}
+
+sc.unzoom = function (canvas, parentDiv) {
+	if ($(parentDiv+' .sc-image-'+canvas.currentImagePosition).data('ui-draggable')) {
+        $(parentDiv+' .sc-image-'+canvas.currentImagePosition)
+        	.draggable( "destroy" )
+            .css({maxWidth: '100%', maxHeight: '100%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'})
+            .css({width: 'auto', height: 'auto', position: 'absolute', zIndex: 1000, cursor: 'zoom-in'});
+	}
+	$(parentDiv+' .sc-unzoom').hide();
+	$(parentDiv+' .sc-zoom').show();
+	$(parentDiv+' .sc-tap-forward-zone').show();
+	$(parentDiv+' .sc-tap-backward-zone').show();
+	//$('body').on('swipeup',function() {
+    //    closeFullScreen(parentDiv);
+    //});
+    //$('body').on('swipedown',function() {
+    //    closeFullScreen(parentDiv);
+	canvas.imageZoomed = false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 var imgPosition = 0;
 var textPosition = 0;
 var position = 1;
@@ -7,6 +223,23 @@ var tryFullScreen = false;
 var imgZoomed = false;
 var backgroundColor = "#cc3300";
 var toolbarColor = "#661a00";
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function moveBackward(parentDiv, slides) {
@@ -204,51 +437,22 @@ function bindZoomFeatures(parentDiv, imgPosition) {
 
     
 function getTextFormatting(slide, displayType) {
-    var myobj = {};
-    if (!slide.hasOwnProperty("textFormatting")) {
-        slide.textFormatting = {};
-    }
-    overlay = ifProp(slide.textFormatting, "overlay", false);
-    center = ifProp(slide.textFormatting, "center", false);
-    if (overlay && center) {
-        myobj.top = '50%';
-        myobj.bottom = 'auto'
-        myobj.transform = 'translate(0, -50%)';
-    } else if (overlay) {
-        myobj.top = ifProp(slide.textFormatting, "top", "70%");
-        myobj.bottom = 'auto';
-        myobj.transform = 'none';
-    } else {
-        myobj.top = 'auto';
-        //if (displayType == 'fullscreen') {
-        //    myobj.bottom = '40px';
-        //} else {
-            myobj.bottom = 0;
-        //}
-        myobj.transform = 'none';
-    }
-    myobj.color = ifProp(slide.textFormatting, "color", "white");
-    myobj.fontSize = ifProp(slide.textFormatting, "fontSize", "20px");
-    myobj.backgroundColor = ifProp(slide.textFormatting, "backgroundColor", "transparent");
-    myobj.opacity = ifProp(slide.textFormatting, "opacity", "1");
-    console.log(myobj);
+	tf = slide.textFormatting;
+	myobj = {
+		fontSize: tf.fontSize,
+		color: tf.color,
+		backgroundColor: tf.backgroundColor,
+		opacity: tf.opacity,
+		transform: tf.transform,
+		top: tf.top,
+		bottom: tf.bottom
+	};
     return myobj;
 }
 
-function getImageBoxFormatting(slide, type, i, j) {
+function getImageBoxFormatting(slide, displayType) {
     var myobj = {};
-    var height = 0;
-    for (var j=0; j < slide.text.length; j++) {
-        var txtClass = 'sc-image-' + i + '-text-' + j;
-        height = Math.max( height, $('.'+txtClass).outerHeight() );
-    }
-    if ( slide.hasOwnProperty('textFormatting')) {
-        var overlay = ifProp(slide.textFormatting, 'overlay', false);
-    }
-    if (type == "fullscreen") {
-        height = height + 40;
-    } 
-    if (!overlay) {
+    if (!slide.textFormatting.overlay) {
         myobj.bottom = '55px';
     }
     return myobj;

@@ -6,7 +6,7 @@
     <title>Slideshow</title>
     <meta name="description" content="Story Canvas Example">
     <meta name="author" content="John Meinken">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
 	<!--  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"> -->
 
 	
@@ -21,8 +21,8 @@
     <!-- FontAwesome -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
     <!-- Story Canvas -->
-    <script src="story_canvas_functions.js"></script>
     <script src="story_canvas.js"></script>
+    <script src="story_canvas_functions.js"></script>
     <link rel="stylesheet" href="story_canvas.css">
 
 
@@ -32,12 +32,13 @@
 var foxStory = {
     slides: [
         {
+        	img: 'img/fox.jpg',
             text: [
                 'A screen with only text<br><br><br><span style="font-size:10px;text-align:center;color: yellow;">can apply any formatting</span>',
             ],
             textFormatting: { 
                 overlay: true,
-                center: true,
+                verticalCenter: true,
                 fontSize: '30px',
             }
         },
@@ -91,7 +92,7 @@ var foxStory = {
             ],
             textFormatting: { 
                 overlay: true,
-                center: true,
+                verticalCenter: true,
                 fontSize: '70px'
             }
         },
@@ -99,12 +100,13 @@ var foxStory = {
     globalSettings: {
         backgroundColor: '#cc3300',
         toolbarColor: '#661a00',
-        tryFullScreen: true,
+        fullScreenOption: true,
+        zoomOption: true,
     }
 }
 
 $( document ).ready(function() {
-	createStoryCanvas(foxStory, "fox-story", true);
+	sc.createStoryCanvas(foxStory, "fox-story", true);
 	
 	$('#drag-me').draggable();
 	
@@ -117,8 +119,8 @@ $( document ).ready(function() {
 <body>
     <div style="margin: 50px;">
         <h1>Title</h1>
-	<div style="width:100%;max-width:600px;height:100vh;max-height:400px;position:relative;">
-		<div id="fox-story-container"></div>
+	<div style="width:100%;max-width:600px;height:90vh;max-height:400px;">
+		<div id="fox-story-embedded"></div>
 	</div>
     
         <div>

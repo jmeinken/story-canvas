@@ -1,0 +1,101 @@
+<script type="text/template" id="left-nav-template">
+    <div class="sc-left-nav">
+        <a href="#" class="sc-back" title="back">
+            <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+        </a>
+    </div>
+</script>
+
+<script type="text/template" id="right-nav-template">
+	<div class="sc-right-nav">
+		<a href="#" class="sc-forward" title="forward">
+			<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+		</a>
+	</div>
+</script>
+
+<script type="text/template" id="tap-forward-zone-template">
+	<div class="sc-tap-forward-zone"></div>
+</script>
+
+<script type="text/template" id="tap-backward-zone-template">
+	<div class="sc-tap-backward-zone"></div>
+</script>
+
+<script type="text/template" id="blackout-template">
+	<div id="blackout">&nbsp;</div>
+</script>
+
+<script type="text/template" id="sc-container-template">
+	<div id="{{canvasName}}-full-window" class="sc-container {{canvasName}}"></div>
+</script>
+
+
+<script type="text/template" id="fullscreen-tool-template">
+	<a href="#" class="sc-go-fullscreen" title="fullscreen mode">
+		<i class="fa fa-arrows-alt" aria-hidden="true"></i>
+	</a>
+	&nbsp;&nbsp;
+</script>
+
+<script type="text/template" id="contract-tool-template">
+	<a href="#" class="sc-close" title="close window">
+        <i class="fa fa-times" aria-hidden="true"></i>
+	</a>
+</script>
+
+<script type="text/template" id="expand-tool-template">
+	<a href="#" class="{{canvasName}}-open" title="expand">
+		<i class="fa fa-expand" aria-hidden="true"></i>
+	</a>
+</script>
+
+
+<script type="text/template" id="story-canvas-template">
+	<div class="story-canvas"></div>
+    {{tapForwardZone}}
+    {{tapBackwardZone}}
+    <div class="sc-toolbar">
+    	<div class="sc-toolbar-right">
+			{{fullscreenTool}}
+	       	<a href="#" class="sc-zoom" title="zoom image"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+	        <a href="#" class="sc-unzoom" title="unzoom"><i class="fa fa-search-minus" aria-hidden="true"></i></a>
+	        &nbsp;&nbsp;
+	        {{expandContractTool}}
+        </div>
+        <div class="sc-toolbar-left">
+        	<a href="#" class="sc-restart" title="start over">
+        		<i class="fa fa-fast-backward" aria-hidden="true"></i>
+        	</a>
+			&nbsp;&nbsp;
+            <span class="sc-position">1</span>/{{slideCount}}
+        </div>
+     </div>
+     {{leftNav}}
+     {{rightNav}}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
