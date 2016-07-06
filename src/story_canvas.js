@@ -23,6 +23,7 @@ sc.createStoryCanvas = function (storyData, storyName, embed) {
 			slideCount:				completeStoryData.slideCount,
 			fullWindowShowing: 		false,							//fullscreen
 			imageZoomed: 			false,	
+			toolsHidden:			false,
 		}
 		if (embed) {
 	        sc.buildCanvasHTML(canvas, 'embedded');
@@ -120,7 +121,7 @@ sc.buildCanvasHTML = function (canvas, canvasType) {
     //attach tap controls for touch
     } else {
         tapForwardZone = sc.templateEngine('tap-forward-zone-template');
-        tapBackwardZone = sc.templateEngine('tap-backward-zone-template');
+        tapBackwardZone = '';	//no tap-backward-zone in this version
     }
     if (canvasType == "fullWindow") {
         var parentDiv = canvas.fullWindowDiv;
@@ -209,10 +210,6 @@ sc.attachGlobalCanvasEvents = function (canvas) {
         canvas.currentTextPosition = 0;
         canvas.currentImagePosition = 0;
         canvas.currentSlidePosition = 1;
-        $('.sc-back').css({visibility: 'hidden'});
-        $('.sc-forward').css({visibility: 'visible'});
-        $('.sc-position').text(canvas.currentSlidePosition);
-        $('.sc-restart').css({color : canvas.globalSettings.backgroundColor});
         sc.showSlide(canvas);
         return false;
     });
@@ -221,18 +218,12 @@ sc.attachGlobalCanvasEvents = function (canvas) {
     	
         $(canvas.canvasDiv).mouseout(function() {
             if (canvas.currentSlidePosition != 1) {
-                $('.sc-left-nav').hide();
-                $('.sc-right-nav').hide();
-                $('.sc-toolbar').hide();
-                $('.story-canvas').stop().animate({top : 0}, 1000);
+                sc.hideTools(canvas);
             }
         });
 
         $(canvas.canvasDiv).mouseover(function() {
-            $('.sc-left-nav').show();
-            $('.sc-right-nav').show();
-            $('.sc-toolbar').show();
-            $('.story-canvas').stop().css({top : '34px'});
+            sc.showTools(canvas);
         });
         
         $(document).keydown(function(e){
@@ -366,7 +357,11 @@ sc.attachHammerEvents = function(canvas) {
 
 	
 	mc.on("singletap", function(ev) {
-		sc.moveForward(canvas);
+		if (canvas.toolsHidden) {
+			sc.showTools(canvas);
+		} else {
+			sc.hideTools(canvas);
+		}
 	});
 	mc.on("doubletap", function(ev) {
     	sc.zoom(canvas, canvas.fullWindowDiv);
@@ -378,7 +373,11 @@ sc.attachHammerEvents = function(canvas) {
 		sc.moveBackward(canvas);
 	});
 	mc.on("swipeup swipedown", function(ev) {
-		sc.closeFullWindow(canvas.name);
+		if (canvas.toolsHidden) {
+			sc.showTools(canvas);
+		} else {
+			sc.hideTools(canvas);
+		}
 	});
 	
 	
@@ -396,7 +395,11 @@ sc.attachHammerEvents = function(canvas) {
 	mc1.add([doubleTap1, singleTap1, swipeleft1, swiperight1]);
 	
 	mc1.on("singletap", function(ev) {
-		sc.moveForward(canvas);
+		if (canvas.toolsHidden) {
+			sc.showTools(canvas);
+		} else {
+			sc.hideTools(canvas);
+		}
 	});
 	mc1.on("doubletap", function(ev) {
     	sc.zoom(canvas, canvas.embeddedDiv);
@@ -408,17 +411,6 @@ sc.attachHammerEvents = function(canvas) {
 		sc.moveBackward(canvas);
 	});
 	
-	
-	
-	var backwardZones = $(canvas.canvasDiv+' .sc-tap-backward-zone').get();
-	
-	for (i=0; i<backwardZones.length; i++) {
-		var mc2 = new Hammer.Manager(backwardZones[i]);
-		mc2.add(new Hammer.Tap({ event: 'singletap' }));
-		mc2.on("singletap", function(ev) {
-			sc.moveBackward(canvas);
-		});
-	}
 	
 	var fullWindowImages = $(canvas.fullWindowDiv+' .sc-image').get();
 	

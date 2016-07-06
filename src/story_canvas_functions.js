@@ -33,6 +33,21 @@ sc.getImageBoxFormatting = function getImageBoxFormatting(slide, displayType) {
     return myobj;
 }
 
+sc.showTools = function(canvas) {
+	$('.sc-left-nav').show();
+    $('.sc-right-nav').show();
+    $('.sc-toolbar').show();
+    $('.story-canvas').stop().css({top : '34px'});
+    canvas.toolsHidden = false;
+}
+
+sc.hideTools = function(canvas) {
+    $('.sc-left-nav').hide();
+    $('.sc-right-nav').hide();
+    $('.sc-toolbar').hide();
+    $('.story-canvas').stop().animate({top : 0}, 1000);
+    canvas.toolsHidden = true;
+}
 
 
 
@@ -71,6 +86,9 @@ sc.closeFullWindow = function (canvasName) {
 
 sc.moveBackward = function (canvas) {
 	if (canvas.currentSlidePosition == 1) {
+		if (canvas.toolsHidden) {
+			sc.showTools(canvas);
+		}
 		return;
 	}
     //change slides
@@ -85,17 +103,13 @@ sc.moveBackward = function (canvas) {
         canvas.currentTextPosition = canvas.slides[canvas.currentImagePosition].text.length - 1;
         sc.showSlide(canvas);
     }
-    //update context
-    $('.sc-forward').css({visibility : 'visible'});
-    $('.sc-restart').css({color : canvas.globalSettings.backgroundColor});
-    if (canvas.currentImagePosition == 0 && canvas.currentTextPosition == 0) {
-        $('.sc-back').css({visibility : 'hidden'});
-    }
-    $('.sc-position').text(canvas.currentSlidePosition);
 }
 
 sc.moveForward = function (canvas) {
 	if (canvas.currentSlidePosition == canvas.slideCount) {
+		if (canvas.toolsHidden) {
+			sc.showTools(canvas);
+		}
 		return;
 	}
     //change slides
@@ -110,27 +124,37 @@ sc.moveForward = function (canvas) {
         canvas.currentTextPosition = 0;
         sc.showSlide(canvas);
     }
-    //update context
-    $('.sc-back').css({visibility : 'visible'});
-    if (canvas.currentImagePosition == canvas.slides.length - 1 
-    		&& canvas.currentTextPosition == canvas.slides[canvas.currentImagePosition].text.length - 1) {
-        $('.sc-forward').css({visibility : 'hidden'});
-        $('.sc-restart').css({color : 'white'});
-    }
-    $('.sc-position').text(canvas.currentSlidePosition);
+    
 }
 
 
 sc.showSlide = function (canvas) {
-    var imgClass = 'sc-image-' + canvas.currentImagePosition
+    var imgClass = 'sc-image-' + canvas.currentImagePosition;
     var textClass = "sc-image-" + canvas.currentImagePosition + '-text-' + canvas.currentTextPosition;
     if ( $('.'+imgClass).length ) {
         $('.'+imgClass).parent().stop().fadeIn(500, function() {
             $('.'+textClass).stop().fadeIn(400);
         });
+        $(canvas.canvasDiv+' .sc-zoom').show();
     } else {
         $('.'+textClass).stop().fadeIn(400);
+        $(canvas.canvasDiv+' .sc-zoom').hide();
     }
+    
+    
+    if (canvas.currentSlidePosition == 1) {
+    	$('.sc-back').css({visibility: 'hidden'});
+    } else {
+    	$('.sc-back').css({visibility: 'visible'});
+    }
+    if (canvas.currentSlidePosition == canvas.slideCount) {
+    	$('.sc-forward').css({visibility : 'hidden'});
+    	$('.sc-restart').css({visibility : 'visible'});
+    } else {
+    	$('.sc-forward').css({visibility : 'visible'});
+    	$('.sc-restart').css({visibility : 'hidden'});
+    }
+    $('.sc-position').text(canvas.currentSlidePosition);
 }
 
 sc.hideSlide = function (canvas) {
@@ -175,7 +199,6 @@ sc.unzoom = function (canvas, parentDiv) {
             .css({width: 'auto', height: 'auto', position: 'absolute', zIndex: 1000, cursor: 'zoom-in'});
 	}
 	$(parentDiv+' .sc-unzoom').hide();
-	$(parentDiv+' .sc-zoom').show();
 	$(parentDiv+' .sc-tap-forward-zone').show();
 	$(parentDiv+' .sc-tap-backward-zone').show();
 	//$('body').on('swipeup',function() {
