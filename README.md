@@ -35,6 +35,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 	```html
 	<script type="text/javascript">
 	
+		// design your story
 		var myStory = {
 		    slides: [
 		        {
@@ -48,7 +49,9 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 		}
 		
 		$( document ).ready(function() {
-			sc.createStoryCanvas(myStory, "my-story", true);
+			// create a new story canvas using the story you designed above
+			// 
+			sc.createStoryCanvas(myStory, "my-story");
 		});
 	    
 	</script>    
