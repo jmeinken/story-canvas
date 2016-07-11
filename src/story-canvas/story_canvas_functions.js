@@ -2,6 +2,7 @@
 sc.templateEngine = function (templateId, args) {
 	args = args || {};
 	var template = $('#'+templateId).html();
+	console.log(templateId);
 	for (arg in args) {
 		var str = "{{"+arg+"}}"
 		template = template.split(str).join(args[arg]);

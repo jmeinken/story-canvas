@@ -4,11 +4,22 @@ var sc = {
 	canvases: []
 };
 
+// need current directory path for loading html templates
+sc_scripts = document.getElementsByTagName("script");
+sc_script = sc_scripts[sc_scripts.length-1];
+
+sc.currentDirPath = function() {
+	var str = sc_script.src;
+	console.log(str.substring(0, str.lastIndexOf("/")));
+	return str.substring(0, str.lastIndexOf("/"));
+}
+
 sc.createStoryCanvas = function (storyData, storyName, embed) {
 	console.log('creating '+storyName);
 	embed = embed || false;
 	$('body').append('<div style="display:none;" id="sc-templates"></div>');
-	$('#sc-templates').load('templates.html', function() {
+	
+	$('#sc-templates').load(sc.currentDirPath()+'/templates.html', function() {
 		completeStoryData = sc.setDefaults(storyData);
 		canvas = {
 			slides:					completeStoryData.slides,
