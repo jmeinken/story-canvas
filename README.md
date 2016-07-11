@@ -2,77 +2,79 @@
 
 A JavaScript tool that combines your images and text into a slideshow that tells a story.  Story Canvas supports touch events and has a responsive design that adapts to any size screen.
 
-<a href="">**See a Demo**</a>
+<a href="http://johnmeinken.com/ver4/story-canvas/src/">**See a Demo**</a>
 
 ## Installing
 
-1. Downloadand unzip the [latest release](https://github.com/jmeinken/story-canvas/archive/version1.0.zip) of Story Canvas.
+1. Download and unzip the [latest release](https://github.com/jmeinken/story-canvas/archive/release1.0.zip) of Story Canvas.
 
-2. Within the code is a folder called `story-canvas`.  Add that folder and its contents to your web project.
+2. Within the code is a folder called `story-canvas`.  Add that folder and its contents (3 files) to your web project.
 
 ## Implementing a Story Canvas on your Web Page
 
 1. *(strongly recommended)* In the `<head>` section of your web page, change the viewport settings for better display on small screens.  Note that this can affect how the entire page looks.
 
-    `<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">`
+	```html
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	```
 
 2. In the `<head>` section of your web page, add jQuery, Font Awesome, and story canvas.
 
-```
-<!-- jQuery  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- FontAwesome -->
-<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
-<!-- Story Canvas -->
-<script src="story-canvas/story-canvas.js"></script>
-<link rel="stylesheet" href="story-canvas/story-canvas.css">
-```
+	```html
+	<!-- jQuery  -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!-- FontAwesome -->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="all" />
+	<!-- Story Canvas -->
+	<script src="story-canvas/story-canvas.js"></script>
+	<link rel="stylesheet" href="story-canvas/story-canvas.css">
+	```
 
-3. Create your story.  Note that you can only have one story canvas on a web page.
+3. In the `<head>` section of your web page, create your story.  Note that you can only have one story canvas on a web page.
 
-```
-<script type="text/javascript">
-
-	var myStory = {
-	    slides: [
-	        {
-				img: 'path/to/myImage.jpg',
-				alt: 'Description of Image',
-	            text: [
-	                'Hello World!',
-	            ]
-	        }
-	    ]
-	}
+	```html
+	<script type="text/javascript">
 	
-	$( document ).ready(function() {
-		sc.createStoryCanvas(myStory, "my-story", true);
-	});
-    
-</script>    
-```
+		var myStory = {
+		    slides: [
+		        {
+					img: 'path/to/myImage.jpg',
+					alt: 'Description of Image',
+		            text: [
+		                'Hello World!',
+		            ]
+		        }
+		    ]
+		}
+		
+		$( document ).ready(function() {
+			sc.createStoryCanvas(myStory, "my-story", true);
+		});
+	    
+	</script>    
+	```
 
-4a. Embed your story canvas in the body of your web page.
+4. (optional) Embed your story canvas in the body of your web page.
 
-```
-<div style="width:100%;max-width:600px;height:90vh;max-height:400px;">
-	<div id="my-story-embedded"></div>
-</div>
-```
+	```html
+	<div style="width:100%;max-width:600px;height:90vh;max-height:400px;">
+		<div id="my-story-embedded"></div>
+	</div>
+	```
 
-4b. Alternately, you can make a link to open the full-window version directly.
+5. (optional) Alternately, you can make a link to open the full-window version directly.
 
-```
-<a href="#" class="my-story-open">Open My Story</a>
-```
+	```html
+	<a href="#" class="my-story-open">Open My Story</a>
+	```
 
 ## Designing your Story Canvas
 
-The entire story canvas content and design is created using a JavaScript object.  You will need to be familiar with [JSON syntax](http://www.w3schools.com/json/).  
+The entire story canvas content and design is created using a JavaScript object.  You will need to be familiar with [JSON syntax](http://www.w3schools.com/json/).  Most of the formatting objects have default values and can be left out altogether.
 
-####Example
+### Example:
 
-```
+```js
 var myStory = {
     globalSettings: {
         backgroundColor: '#cc3300',
@@ -113,84 +115,69 @@ var myStory = {
 }
 ```
 
-### globalSettings (object)
+### Options:
+
+#### `globalSettings` (object)
 
 An object containing settings that affect your entire story canvas
 
-### globalSettings.backgroundColor (string, default='#cc3300')
+#### `globalSettings.backgroundColor` (string, default='#cc3300')
 
-The CSS color for your story canvas bacdkground
+The CSS color for your story canvas background
 
-### globalSettings.toolbarColor (string, default='#661a00')
+#### `globalSettings.toolbarColor` (string, default='#661a00')
 
 The CSS color for your story canvas toolbar
 
-### globalSettings.emphasisColor (string, default='#fff')
+#### `globalSettings.emphasisColor` (string, default='#fff')
 
 The CSS color used when a tool is emphasized in the toolbar.
 
-### slides (array)
+#### `slides` (array)
 
 **(Required)** An array of image and text content for your story.
 
-### slides[].img (string, no default)
+#### `slides[].img` (string, no default)
 
 The file path to your image.  Leave out of a slide if you want text only.
 
-### slides[].alt (string, no default)
+#### `slides[].alt` (string, no default)
 
 **(Required if slides[].img is set)** Alternate text for your image.
 
-### slides[].text (array of strings, no default)
+#### `slides[].text` (array of strings, no default)
 
 A list of text strings to use in your slide.  Each text string will be show separately.  HTML markup for formatting is allowed.  Leave out if you want to show an image without text.
 
-### slides[].textFormatting (object)
+#### `slides[].textFormatting` (object)
 
 An object containing text formatting settings for a particular slide
 
-### slides[].textFormatting.fontSize (string, default="20px")
+#### `slides[].textFormatting.fontSize` (string, default="20px")
 
 The CSS font size for your text.
 
-### slides[].textFormatting.color (string, default="#fff")
+#### `slides[].textFormatting.color` (string, default="#fff")
 
 The CSS color for your text.
 
-### slides[].textFormatting.backgroundColor (string, default="transparent")
+#### `slides[].textFormatting.backgroundColor` (string, default="transparent")
 
 The CSS background color for your text.
 
-### slides[].textFormatting.opacity (number, default=1)
+#### `slides[].textFormatting.opacity` (number, default=1)
 
 The CSS opacity for your text.
 
-### slides[].textFormatting.overlay (boolean, default=false)
+#### `slides[].textFormatting.overlay` (boolean, default=false)
 
 If overlay is false, a separate space will be created below the image for your text.  If overlay is true, the image will take the full space and your text will appear on top of your image.
 
-### slides[].textFormatting.top (string, default='70%')
+#### `slides[].textFormatting.top` (string, default='70%')
 
 When overlay is true, this will set the distance from the top where the text will start on the canvas.  
 
-### slides[].textFormatting.verticalCenter (boolean, default=false)
+#### `slides[].textFormatting.verticalCenter` (boolean, default=false)
 
 When overlay is true, this will center the text vertically in the canvas. When true, the `textFormatting.top` setting will be ignored.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
