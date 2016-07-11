@@ -18,7 +18,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 	```
 
-2. In the `<head>` section of your web page, add jQuery, Font Awesome, and story canvas.
+2. In the `<head>` section of your web page, add jQuery, Font Awesome, and story canvas.  The paths for the story-canvas files may be different depending on where you installed the story-canvas folder.
 
 	```html
 	<!-- jQuery  -->
