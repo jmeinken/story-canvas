@@ -70,7 +70,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 
 ## Designing your Story Canvas
 
-The entire story canvas content and design is created using a JavaScript object.  You will need to be familiar with [JSON syntax](http://www.w3schools.com/json/).  Most of the formatting objects have default values and can be left out altogether.
+The entire story canvas content and design is created using a JavaScript object.  You will need to be familiar with [JSON syntax](http://www.w3schools.com/json/).  Most of the formatting settings have default values and can be left out altogether.
 
 ### Example:
 
