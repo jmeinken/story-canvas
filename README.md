@@ -30,7 +30,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 	<link rel="stylesheet" href="story-canvas/story-canvas.css">
 	```
 
-3. Create your story.  Note that you can only have one story canvas on a web page.
+3. In the `<head>` section of your web page, create your story.  Note that you can only have one story canvas on a web page.
 
 	```html
 	<script type="text/javascript">
