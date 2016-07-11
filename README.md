@@ -14,13 +14,13 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 
 1. *(strongly recommended)* In the `<head>` section of your web page, change the viewport settings for better display on small screens.  Note that this can affect how the entire page looks.
 
-	```
+	```html
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 	```
 
 2. In the `<head>` section of your web page, add jQuery, Font Awesome, and story canvas.
 
-	```
+	```html
 	<!-- jQuery  -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<!-- FontAwesome -->
@@ -32,7 +32,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 
 3. Create your story.  Note that you can only have one story canvas on a web page.
 
-	```
+	```html
 	<script type="text/javascript">
 	
 		var myStory = {
@@ -56,7 +56,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 
 4. (optional) Embed your story canvas in the body of your web page.
 
-	```
+	```html
 	<div style="width:100%;max-width:600px;height:90vh;max-height:400px;">
 		<div id="my-story-embedded"></div>
 	</div>
@@ -64,7 +64,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 
 5. (optional) Alternately, you can make a link to open the full-window version directly.
 
-	```
+	```html
 	<a href="#" class="my-story-open">Open My Story</a>
 	```
 
@@ -74,7 +74,7 @@ The entire story canvas content and design is created using a JavaScript object.
 
 ### Example:
 
-```
+```js
 var myStory = {
     globalSettings: {
         backgroundColor: '#cc3300',
@@ -117,67 +117,67 @@ var myStory = {
 
 ### Options:
 
-#### <span style="color:#005ce6">globalSettings</span> (object)
+#### `globalSettings` (object)
 
 An object containing settings that affect your entire story canvas
 
-#### <span style="color:#005ce6">globalSettings.backgroundColor</span> (string, default='#cc3300')
+#### `globalSettings.backgroundColor` (string, default='#cc3300')
 
 The CSS color for your story canvas background
 
-#### <span style="color:#005ce6">globalSettings.toolbarColor</span> (string, default='#661a00')
+#### `globalSettings.toolbarColor` (string, default='#661a00')
 
 The CSS color for your story canvas toolbar
 
-#### <span style="color:#005ce6">globalSettings.emphasisColor</span> (string, default='#fff')
+#### `globalSettings.emphasisColor` (string, default='#fff')
 
 The CSS color used when a tool is emphasized in the toolbar.
 
-#### <span style="color:#005ce6">slides</span> (array)
+#### `slides` (array)
 
 **(Required)** An array of image and text content for your story.
 
-#### <span style="color:#005ce6">slides[].img</span> (string, no default)
+#### `slides[].img` (string, no default)
 
 The file path to your image.  Leave out of a slide if you want text only.
 
-#### <span style="color:#005ce6">slides[].alt</span> (string, no default)
+#### `slides[].alt` (string, no default)
 
 **(Required if slides[].img is set)** Alternate text for your image.
 
-#### <span style="color:#005ce6">slides[].text</span> (array of strings, no default)
+#### `slides[].text` (array of strings, no default)
 
 A list of text strings to use in your slide.  Each text string will be show separately.  HTML markup for formatting is allowed.  Leave out if you want to show an image without text.
 
-#### <span style="color:#005ce6">slides[].textFormatting</span> (object)
+#### `slides[].textFormatting` (object)
 
 An object containing text formatting settings for a particular slide
 
-#### <span style="color:#005ce6">slides[].textFormatting.fontSize</span> (string, default="20px")
+#### `slides[].textFormatting.fontSize` (string, default="20px")
 
 The CSS font size for your text.
 
-#### <span style="color:#005ce6">slides[].textFormatting.color</span> (string, default="#fff")
+#### `slides[].textFormatting.color` (string, default="#fff")
 
 The CSS color for your text.
 
-#### <span style="color:#005ce6">slides[].textFormatting.backgroundColor</span> (string, default="transparent")
+#### `slides[].textFormatting.backgroundColor` (string, default="transparent")
 
 The CSS background color for your text.
 
-#### <span style="color:#005ce6">slides[].textFormatting.opacity</span> (number, default=1)
+#### `slides[].textFormatting.opacity` (number, default=1)
 
 The CSS opacity for your text.
 
-#### <span style="color:#005ce6">slides[].textFormatting.overlay</span> (boolean, default=false)
+#### `slides[].textFormatting.overlay` (boolean, default=false)
 
 If overlay is false, a separate space will be created below the image for your text.  If overlay is true, the image will take the full space and your text will appear on top of your image.
 
-#### <span style="color:#005ce6">slides[].textFormatting.top</span> (string, default='70%')
+#### `slides[].textFormatting.top` (string, default='70%')
 
 When overlay is true, this will set the distance from the top where the text will start on the canvas.  
 
-#### <span style="color:#005ce6">slides[].textFormatting.verticalCenter</span> (boolean, default=false)
+#### `slides[].textFormatting.verticalCenter` (boolean, default=false)
 
 When overlay is true, this will center the text vertically in the canvas. When true, the `textFormatting.top` setting will be ignored.
 
