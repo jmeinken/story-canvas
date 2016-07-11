@@ -39,8 +39,6 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 		var myStory = {
 		    slides: [
 		        {
-					img: 'path/to/myImage.jpg',
-					alt: 'Description of Image',
 		            text: [
 		                'Hello World!',
 		            ]
@@ -50,8 +48,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 		
 		$( document ).ready(function() {
 			// create a new story canvas using the story you designed above
-			// 
-			sc.createStoryCanvas(myStory, "my-story");
+			sc.createStoryCanvas(myStory, "my-story", true);
 		});
 	    
 	</script>    
