@@ -8,7 +8,7 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 
 1. Download and unzip the [latest release](https://github.com/jmeinken/story-canvas/archive/release1.0.zip) of Story Canvas.
 
-2. Within the code is a folder called `story-canvas`.  Add that folder and its contents to your web project.
+2. Within the code is a folder called `story-canvas`.  Add that folder and its contents (3 files) to your web project.
 
 ## Implementing a Story Canvas on your Web Page
 
