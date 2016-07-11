@@ -2,7 +2,7 @@
 
 A JavaScript tool that combines your images and text into a slideshow that tells a story.  Story Canvas supports touch events and has a responsive design that adapts to any size screen.
 
-<a href="http://johnmeinken.com/ver4/story-canvas/src/">**See a Demo**</a>
+<a href="http://johnmeinken.com/ver4/story-canvas/example.html">**See a Demo**</a>
 
 ## Installing
 
