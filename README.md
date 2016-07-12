@@ -48,6 +48,11 @@ A JavaScript tool that combines your images and text into a slideshow that tells
 		
 		$( document ).ready(function() {
 			// create a new story canvas using the story you designed above
+			// the createStoryCanvas() function takes 3 arguments
+			//    1. the object representing your story canvas
+			//    2. a name for your story canvas (letters, dashes and underscores allowed)
+			//    3. a boolean for whether you want to embed the story canvas in your
+			//       web page (if false, only the full-window view will be available)
 			sc.createStoryCanvas(myStory, "my-story", true);
 		});
 	    
@@ -180,4 +185,5 @@ When overlay is true, this will set the distance from the top where the text wil
 #### `slides[].textFormatting.verticalCenter` (boolean, default=false)
 
 When overlay is true, this will center the text vertically in the canvas. When true, the `textFormatting.top` setting will be ignored.
+
 
